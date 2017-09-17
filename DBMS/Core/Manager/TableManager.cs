@@ -8,6 +8,9 @@ namespace DBMS.Core.Manager
 {
     class TableManager
     {
+        public TableManager()
+        {
 
+        }
     }
 }
