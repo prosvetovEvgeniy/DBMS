@@ -8,9 +8,12 @@ namespace DBMS.Core.Parser
 {
     class DescriptionParser
     {
+       
         public DescriptionParser()
         {
 
         }
+
+
     }
 }

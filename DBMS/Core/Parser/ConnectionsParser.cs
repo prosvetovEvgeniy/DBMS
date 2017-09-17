@@ -8,6 +8,9 @@ namespace DBMS.Core.Parser
 {
     class ConnectionsParser
     {
+        public ConnectionsParser()
+        {
 
+        }
     }
 }

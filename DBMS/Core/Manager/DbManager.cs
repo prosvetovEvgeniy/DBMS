@@ -7,10 +7,10 @@ using System.IO;
 
 namespace DBMS.Core.Manager
 {
-    class FileManager : BaseManager
+    class DbManager : BaseManager
     {
 
-        public FileManager()
+        public DbManager()
         {
             
         }

@@ -14,7 +14,8 @@ namespace DBMS
 {
     public partial class Form1 : Form
     {
-        private FileManager fm; //файловый менеджер
+        private DbManager dbm; //файловый менеджер
+        private TableManager tm; //менеджер для работы с таблицами
         private string currentDbName; //название выбранной бд
         private string currentTableName; //название выбранной таблицы
 
@@ -22,13 +23,14 @@ namespace DBMS
         {
             InitializeComponent();
 
-            fm = new FileManager();
+            dbm = new DbManager();
+            tm = new TableManager();
             setDatabases();
         }
         //загружает названия сущ. бд в comboBox
         private void setDatabases()
         {
-            List<string> dbs = fm.getDatabases();
+            List<string> dbs = dbm.getDatabases();
             foreach (var db in dbs)
             {
                 comboBox1.Items.Add(db);
@@ -43,7 +45,7 @@ namespace DBMS
         private void setTable(string dbName)
         {
             listBox1.Items.Clear();
-            List<string> tables = fm.getTables(this.currentDbName);
+            List<string> tables = dbm.getTables(this.currentDbName);
 
             foreach(var table in tables)
             {
@@ -51,7 +53,7 @@ namespace DBMS
             }
             if(tables.Count > 0)
             {
-                this.currentDbName = tables[0];
+                this.currentTableName = tables[0];
             }
         }
         //срабатывает при изменении базы данных
@@ -64,6 +66,8 @@ namespace DBMS
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             this.currentTableName = listBox1.SelectedItem.ToString();
+
+            //List<string> fields = tm.getFields(this.currentDbName, this.currentTableName);
             
         }
 

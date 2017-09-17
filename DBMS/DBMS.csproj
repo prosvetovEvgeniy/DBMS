@@ -46,7 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Manager\BaseManager.cs" />
-    <Compile Include="Core\Manager\FileManager.cs" />
+    <Compile Include="Core\Manager\DbManager.cs" />
+    <Compile Include="Core\Parser\BaseParser.cs" />
     <Compile Include="Core\Parser\ConnectionsParser.cs" />
     <Compile Include="Core\Parser\DataParser.cs" />
     <Compile Include="Core\Parser\DescriptionParser.cs" />

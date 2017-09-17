@@ -8,5 +8,9 @@ namespace DBMS.Core.Parser
 {
     class DataParser
     {
+        public DataParser()
+        {
+
+        }
     }
 }

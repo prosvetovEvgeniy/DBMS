@@ -8,5 +8,13 @@ namespace DBMS.Core.Parser
 {
     class BaseParser
     {
+        protected string filePath;
+
+        public BaseParser(string filePath)
+        {
+            this.filePath = filePath;
+        }
+
+        
     }
 }
