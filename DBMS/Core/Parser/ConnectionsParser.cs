@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DBMS.Core.Parser
 {
-    class ConnectionsParser
+    class ConnectionsParser : BaseParser
     {
-        public ConnectionsParser()
+        public ConnectionsParser(string filePath) : base(filePath)
         {
 
         }

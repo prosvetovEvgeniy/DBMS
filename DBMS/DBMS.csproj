@@ -47,6 +47,9 @@
   <ItemGroup>
     <Compile Include="Core\Manager\BaseManager.cs" />
     <Compile Include="Core\Manager\DbManager.cs" />
+    <Compile Include="Core\OwnTypes\Connections.cs" />
+    <Compile Include="Core\OwnTypes\Data.cs" />
+    <Compile Include="Core\OwnTypes\Description.cs" />
     <Compile Include="Core\Parser\BaseParser.cs" />
     <Compile Include="Core\Parser\ConnectionsParser.cs" />
     <Compile Include="Core\Parser\DataParser.cs" />

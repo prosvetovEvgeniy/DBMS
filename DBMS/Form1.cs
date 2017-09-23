@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using DBMS.Core.Manager;
+using DBMS.Core.OwnTypes;
 
 namespace DBMS
 {
@@ -41,6 +42,7 @@ namespace DBMS
                 comboBox1.SelectedItem = this.currentDbName;
             }
         }
+
         //загружает название таблиц listBox
         private void setTable(string dbName)
         {
@@ -66,9 +68,21 @@ namespace DBMS
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             this.currentTableName = listBox1.SelectedItem.ToString();
-
-            //List<string> fields = tm.getFields(this.currentDbName, this.currentTableName);
             
+            List<Description> fields = tm.getFields(this.currentDbName, this.currentTableName);
+
+            setColumns(fields);
+        }
+
+        private void setColumns(List<Description> fields) {
+
+            dataGridView1.Columns.Clear();
+
+            dataGridView1.ColumnCount = fields.Count;
+            for (int i = 0; i < fields.Count; i++)
+            {
+                dataGridView1.Columns[i].Name = fields[i].getFieldName();
+            }
         }
 
         private void consoleWrite(string str)

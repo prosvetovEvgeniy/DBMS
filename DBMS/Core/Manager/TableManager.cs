@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBMS.Core.Parser;
+using DBMS.Core.OwnTypes;
 
 namespace DBMS.Core.Manager
 {
@@ -14,13 +15,12 @@ namespace DBMS.Core.Manager
 
         }
 
-        public List<string> getFields(string dbName, string tableName)
+        public List<Description> getFields(string dbName, string tableName)
         {
-            List<string> fields = new List<string>();
+            string pathToFile = base.getPathToTableDescription(dbName, tableName);
+            DescriptionParser dParser = new DescriptionParser(pathToFile);
 
-            //DescriptionParser dParser = new DescriptionParser(pathToFile);
-
-            return fields;
+            return dParser.getFields();
         }
     }
 }

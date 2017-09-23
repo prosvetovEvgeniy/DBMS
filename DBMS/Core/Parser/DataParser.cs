@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DBMS.Core.Parser
 {
-    class DataParser
+    class DataParser : BaseParser
     {
-        public DataParser()
+        public DataParser(string filePath) : base(filePath)
         {
 
         }
