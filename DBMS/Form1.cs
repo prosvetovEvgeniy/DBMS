@@ -15,23 +15,25 @@ namespace DBMS
 {
     public partial class Form1 : Form
     {
-        private DbManager dbm; //файловый менеджер
-        private TableManager tm; //менеджер для работы с таблицами
+        private DbManager dbManager; //файловый менеджер
+        private TableManager tableManager; //менеджер для работы с таблицами
         private string currentDbName; //название выбранной бд
         private string currentTableName; //название выбранной таблицы
+        private Database db;
 
         public Form1()
         {
             InitializeComponent();
 
-            dbm = new DbManager();
-            tm = new TableManager();
+            dbManager = new DbManager();
+            tableManager = new TableManager();
+            db = new Database();
             setDatabases();
         }
         //загружает названия сущ. бд в comboBox
         private void setDatabases()
         {
-            List<string> dbs = dbm.getDatabases();
+            List<string> dbs = dbManager.getDatabases();
             foreach (var db in dbs)
             {
                 comboBox1.Items.Add(db);
@@ -43,21 +45,46 @@ namespace DBMS
             }
         }
 
-        //загружает название таблиц listBox
+        //загружает таблицы
         private void setTable(string dbName)
         {
-            listBox1.Items.Clear();
-            List<string> tables = dbm.getTables(this.currentDbName);
 
-            foreach(var table in tables)
-            {
-                listBox1.Items.Add(table);
+            db.clearTables();
+            listBox1.Enabled = true;
+            listBox1.Items.Clear();
+
+            List<string> tableNames = dbManager.getTables(this.currentDbName);
+
+            foreach(string name in tableNames){
+                this.db.addTable(new Table(name));
             }
-            if(tables.Count > 0)
+
+            if (db.Count == 0)
             {
-                this.currentTableName = tables[0];
+                listBox1.Enabled = false;
             }
+
+            for (int i = 0; i < db.Count; i++)
+            {
+                listBox1.Items.Add(db.getTableByIndex(i).TableName);
+            }
+
+            //List<Description> fields = tableManager.getFields(this.currentDbName, this.currentTableName);
+            //List<Data> data = tableManager.getTableData(this.currentDbName, this.currentTableName);
+
+            for(int i = 0; i < db.Count; i++)
+            {
+                Table table = db.getTableByIndex(i);
+
+                List<Description> fields = tableManager.getFields(this.currentDbName, table.TableName);
+                List<Data> data = tableManager.getTableData(this.currentDbName, table.TableName);
+
+                table.setFields(fields);
+                table.setData(data);
+            }
+
         }
+
         //срабатывает при изменении базы данных
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -65,13 +92,16 @@ namespace DBMS
             setTable(this.currentDbName);
         }
 
+        //срабатывает при изменении таблицы
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             this.currentTableName = listBox1.SelectedItem.ToString();
             
-            List<Description> fields = tm.getFields(this.currentDbName, this.currentTableName);
+            List<Description> fields = tableManager.getFields(this.currentDbName, this.currentTableName);
+            List<Data> data = tableManager.getTableData(this.currentDbName, this.currentTableName);
 
             setColumns(fields);
+            setData(data);
         }
 
         private void setColumns(List<Description> fields) {
@@ -82,6 +112,19 @@ namespace DBMS
             for (int i = 0; i < fields.Count; i++)
             {
                 dataGridView1.Columns[i].Name = fields[i].getFieldName();
+            }
+        }
+
+        private void setData(List<Data> data)
+        {
+            
+            //dataGridView1.Rows.Add(str);
+
+            foreach(Data line in data)
+            {
+                List<string> fieldContent = line.getContent();
+                
+                dataGridView1.Rows.Add(fieldContent.ToArray());
             }
         }
 

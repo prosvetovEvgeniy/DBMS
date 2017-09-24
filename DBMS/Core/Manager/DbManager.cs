@@ -15,7 +15,7 @@ namespace DBMS.Core.Manager
             
         }
 
-        //повращает имена баз данных ввиде строк
+        //вовращает имена баз данных ввиде строк
         public List<string> getDatabases()
         {
             List<string> dirs = new List<string>(Directory.EnumerateDirectories(this.dbPath));

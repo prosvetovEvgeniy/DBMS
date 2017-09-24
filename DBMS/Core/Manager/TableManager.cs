@@ -18,9 +18,17 @@ namespace DBMS.Core.Manager
         public List<Description> getFields(string dbName, string tableName)
         {
             string pathToFile = base.getPathToTableDescription(dbName, tableName);
-            DescriptionParser dParser = new DescriptionParser(pathToFile);
+            DescriptionParser descriptionParser = new DescriptionParser(pathToFile);
 
-            return dParser.getFields();
+            return descriptionParser.getFields();
+        }
+
+        public List<Data> getTableData(string dbName, string tableName)
+        {
+            string pathToFile = base.getPathToTableData(dbName, tableName);
+            DataParser dataParser = new DataParser(pathToFile);
+
+            return dataParser.getTableData();
         }
     }
 }

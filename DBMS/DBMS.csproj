@@ -50,6 +50,8 @@
     <Compile Include="Core\OwnTypes\Connections.cs" />
     <Compile Include="Core\OwnTypes\Data.cs" />
     <Compile Include="Core\OwnTypes\Description.cs" />
+    <Compile Include="Core\OwnTypes\Table.cs" />
+    <Compile Include="Core\OwnTypes\Database.cs" />
     <Compile Include="Core\Parser\BaseParser.cs" />
     <Compile Include="Core\Parser\ConnectionsParser.cs" />
     <Compile Include="Core\Parser\DataParser.cs" />
