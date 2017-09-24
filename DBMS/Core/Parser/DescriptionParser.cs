@@ -17,7 +17,7 @@ namespace DBMS.Core.Parser
         // парсит поля таблицы
         public List<Description> getFields()
         {
-            string data = File.ReadAllText(this.filePath + DESCRIPTION_FILE_NAME, Encoding.Default);
+            string data = File.ReadAllText(this.filePath, Encoding.GetEncoding(1251));
 
             List<Description> fields = new List<Description>();
 

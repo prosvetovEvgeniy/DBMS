@@ -1,0 +1,6 @@
+{
+id:0
+category_id:1
+name:Кожанная куртка
+price:9200
+}

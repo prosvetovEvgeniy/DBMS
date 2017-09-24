@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DBMS.Core.Manager;
+using System.IO;
 
 namespace DBMS.Core.OwnTypes
 {
@@ -22,6 +24,25 @@ namespace DBMS.Core.OwnTypes
             fields = new List<Description>();
         }
 
+        //savers
+        public void save(string dbName)
+        {
+            FileManager fm = new FileManager();
+            string data = "";
+
+            foreach(Row row in rows)
+            {
+                data += "{\r\n";
+                for(int i = 0; i < row.CountFields; i++)
+                {
+                    data += row.getFieldByIndex(i) + ":" + row.getFieldContentByIndex(i) + "\r\n";
+                }
+                data += "}\r\n";
+            }
+
+            System.IO.File.WriteAllText(fm.getPathToTableData(dbName, tableName), data);
+        }
+
         //adders
         public void addConnection(Connections connection)
         {
@@ -39,12 +60,19 @@ namespace DBMS.Core.OwnTypes
 
             rows.Add(addedRow);
         }
+
         //removers
+        public void removeAllRows()
+        {
+            rows.Clear();
+            rows = new List<Row>();
+        }
 
         public void removeRowByIndex(int index)
         {
             rows.RemoveAt(index);
         }
+
         //setters
         public void setTableName(string name)
         {

@@ -8,7 +8,7 @@ using DBMS.Core.OwnTypes;
 
 namespace DBMS.Core.Manager
 {
-    class TableManager : BaseManager
+    class TableManager : FileManager
     {
         public TableManager()
         {

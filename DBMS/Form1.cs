@@ -52,6 +52,8 @@ namespace DBMS
         {
 
             db.clearTables();
+            db.setDbName(dbName);
+
             listBox1.Enabled = true;
             listBox1.Items.Clear();
 
@@ -122,7 +124,8 @@ namespace DBMS
                 string[] content = table.getRowByIndex(i).getContent().ToArray();
                 dataGridView1.Rows.Add(content);
             }
-            int a = 5;
+
+            dataGridView1.ReadOnly = true;
         }
         private void consoleWrite(string str)
         {
@@ -135,13 +138,21 @@ namespace DBMS
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            ChangeForm changeForm = new ChangeForm();
+            changeForm.Owner = this;
+            changeForm.initOwner();
+            changeForm.ShowDialog();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            db.getTableByName(currentTableName).removeRowByIndex(dataGridView1.CurrentRow.Index);
-            setTable();
+            if(db.getTableByName(currentTableName).CountRows != 0)
+            {
+                db.getTableByName(currentTableName).removeRowByIndex(dataGridView1.CurrentRow.Index);
+                db.getTableByName(currentTableName).save(currentDbName);
+
+                setTable();
+            }
         }
         
         private void button3_Click(object sender, EventArgs e)

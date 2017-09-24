@@ -7,7 +7,7 @@ using System.IO;
 
 namespace DBMS.Core.Manager
 {
-    class DbManager : BaseManager
+    class DbManager : FileManager
     {
 
         public DbManager()

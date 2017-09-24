@@ -12,10 +12,10 @@ using DBMS.Core.Checker;
 
 namespace DBMS
 {
-    public partial class AddForm : Form
+    public partial class ChangeForm : Form
     {
         private Form1 owner;
-        public AddForm()
+        public ChangeForm()
         {
             InitializeComponent();
         }
@@ -29,7 +29,7 @@ namespace DBMS
         private void setTable()
         {
             dataGridView1.Columns.Clear();
-            
+
             Table table = owner.db.getTableByName(owner.currentTableName);
 
             dataGridView1.ColumnCount = table.CountFields;
@@ -38,18 +38,25 @@ namespace DBMS
             {
                 dataGridView1.Columns[i].Name = table.getFieldByIndex(i).FieldName + " (" + table.getFieldByIndex(i).FieldType + ")";
             }
+
+            for (int i = 0; i < table.CountRows; i++)
+            {
+                string[] content = table.getRowByIndex(i).getContent().ToArray();
+                dataGridView1.Rows.Add(content);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             List<List<string>> rows = new List<List<string>>();
 
-            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
+            for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 List<string> row = new List<string>();
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
                 {
-                    if(dataGridView1[j, i].Value == null)
+                    if (dataGridView1[j, i].Value == null)
                     {
                         row.Add("");
                     }
@@ -57,7 +64,7 @@ namespace DBMS
                     {
                         row.Add(dataGridView1[j, i].Value.ToString());
                     }
-                    
+
                 }
                 rows.Add(row);
             }
@@ -66,10 +73,12 @@ namespace DBMS
 
             if (TypeChecker.checkTypes(rows, table))
             {
+                owner.db.getTableByName(owner.currentTableName).removeAllRows();
                 for (int i = 0; i < rows.Count; i++)
                 {
                     owner.db.getTableByName(owner.currentTableName).addRow(rows[i]);
                 }
+
                 owner.db.getTableByName(owner.currentTableName).save(owner.currentDbName);
                 owner.setTable();
                 Close();
@@ -78,7 +87,6 @@ namespace DBMS
             {
                 MessageBox.Show("Данные не совпадают с типами!");
             }
-            
         }
 
         private void button2_Click(object sender, EventArgs e)

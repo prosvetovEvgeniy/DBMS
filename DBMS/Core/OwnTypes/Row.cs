@@ -17,6 +17,7 @@ namespace DBMS.Core.OwnTypes
             fieldsContent = new List<string>();
         }
 
+        //adders
         public void addField(string field)
         {
             fields.Add(field);
@@ -27,6 +28,7 @@ namespace DBMS.Core.OwnTypes
             fieldsContent.Add(content);
         }
 
+        //setters
         public void setFields(List<string> fields)
         {
             this.fields = fields;
@@ -36,7 +38,23 @@ namespace DBMS.Core.OwnTypes
         {
             this.fieldsContent = fieldsContent;
         }
-       
+
+        //getters
+        public string getFieldByIndex(int index)
+        {
+            return fields[index];
+        }
+
+        public string getFieldContentByIndex(int index)
+        {
+            return fieldsContent[index];
+        }
+
+        public int CountFields
+        {
+            get { return fields.Count; }
+        }
+
         public List<string> getContent()
         {
             return this.fieldsContent;
