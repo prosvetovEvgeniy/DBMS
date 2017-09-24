@@ -9,7 +9,7 @@ namespace DBMS.Core.OwnTypes
     class Table
     {
         private string tableName;
-        private List<Data> data;
+        private List<Line> lines;
         private List<Connections> connections;
         private List<Description> fields;
 
@@ -17,28 +17,26 @@ namespace DBMS.Core.OwnTypes
         {
             this.tableName = tableName;
 
-            data = new List<Data>();
+            lines = new List<Line>();
             connections = new List<Connections>();
             fields = new List<Description>();
         }
-        
+
+        //adders
+        public void addConnection(Connections connection)
+        {
+            this.connections.Add(connection);
+        }
+
+        //setters
         public void setTableName(string name)
         {
             this.tableName = name;
         }
-
-        public string TableName {
-            get { return tableName; }
-        }
-
-        public void setData(List<Data> data)
+    
+        public void setLines(List<Line> lines)
         {
-            this.data = data;
-        }
-
-        public void addConnection(Connections connection)
-        {
-            this.connections.Add(connection);
+            this.lines = lines;
         }
 
         public void setFields(List<Description> fields)
@@ -46,9 +44,20 @@ namespace DBMS.Core.OwnTypes
             this.fields = fields;
         }
 
-        public List<Data> getData()
+        //getters
+        public Line getLineByIndex(int index)
         {
-            return data;
+            return lines[index];
+        }
+        
+        public Description getFieldByIndex(int index)
+        {
+            return fields[index];
+        }
+
+        public List<Line> getLines()
+        {
+            return lines;
         }
 
         public List<Connections> getConnections()
@@ -59,6 +68,21 @@ namespace DBMS.Core.OwnTypes
         public List<Description> getFields()
         {
             return fields;
+        }
+
+        public string TableName
+        {
+            get { return tableName; }
+        }
+
+        public int CountFields
+        {
+            get { return fields.Count; }
+        }
+
+        public int CountLines
+        {
+            get { return lines.Count; }
         }
     }
 }

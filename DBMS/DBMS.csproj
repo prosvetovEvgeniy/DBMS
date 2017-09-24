@@ -48,7 +48,7 @@
     <Compile Include="Core\Manager\BaseManager.cs" />
     <Compile Include="Core\Manager\DbManager.cs" />
     <Compile Include="Core\OwnTypes\Connections.cs" />
-    <Compile Include="Core\OwnTypes\Data.cs" />
+    <Compile Include="Core\OwnTypes\Line.cs" />
     <Compile Include="Core\OwnTypes\Description.cs" />
     <Compile Include="Core\OwnTypes\Table.cs" />
     <Compile Include="Core\OwnTypes\Database.cs" />

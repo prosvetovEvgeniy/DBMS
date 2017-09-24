@@ -23,7 +23,7 @@ namespace DBMS.Core.Manager
             return descriptionParser.getFields();
         }
 
-        public List<Data> getTableData(string dbName, string tableName)
+        public List<Line> getTableData(string dbName, string tableName)
         {
             string pathToFile = base.getPathToTableData(dbName, tableName);
             DataParser dataParser = new DataParser(pathToFile);

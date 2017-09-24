@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DBMS.Core.OwnTypes
 {
-    class Data
+    class Line
     {
         private List<string> fields;
         private List<string> fieldContent;
 
-        public Data()
+        public Line()
         {
             fields = new List<string>();
             fieldContent = new List<string>();

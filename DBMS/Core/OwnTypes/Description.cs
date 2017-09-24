@@ -19,19 +19,18 @@ namespace DBMS.Core.OwnTypes
             this.nullState = nullState;
         }
 
-        public string getFieldName()
-        {
-            return fieldName;
+        public string FieldName {
+            get { return fieldName; }
         }
 
-        public string getFieldType()
+        public string FieldType
         {
-            return fieldType;
+            get { return fieldType; }
         }
 
-        public bool getNullState()
+        public bool FieldNullState
         {
-            return nullState;
+            get { return nullState; }
         }
     }
 }

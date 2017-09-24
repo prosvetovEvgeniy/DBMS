@@ -16,9 +16,9 @@ namespace DBMS.Core.Parser
 
         }
 
-        public List<Data> getTableData()
+        public List<Line> getTableData()
         {
-            List<Data> tableData = new List<Data>();
+            List<Line> tableData = new List<Line>();
             string data = File.ReadAllText(this.filePath + DATA_FILE_NAME, Encoding.Default);
             string pattern = @"({\r\n)|(\r\n})";
 
@@ -28,7 +28,7 @@ namespace DBMS.Core.Parser
             
             for(int i = 0; i < lines.Count; i++)
             {
-                tableData.Add(new Data());
+                tableData.Add(new Line());
 
                 string[] fields = lines[i].Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 for(int j = 0; j < fields.Length; j++)

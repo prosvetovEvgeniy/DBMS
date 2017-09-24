@@ -42,7 +42,7 @@ namespace DBMS.Core.OwnTypes
             return new Table("undefined");
         }
 
-        public int Count
+        public int CountTables
         {
             get { return tables.Count; }
         }

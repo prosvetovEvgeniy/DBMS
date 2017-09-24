@@ -59,28 +59,27 @@ namespace DBMS
                 this.db.addTable(new Table(name));
             }
 
-            if (db.Count == 0)
+            if (db.CountTables == 0)
             {
                 listBox1.Enabled = false;
             }
 
-            for (int i = 0; i < db.Count; i++)
+            for (int i = 0; i < db.CountTables; i++)
             {
                 listBox1.Items.Add(db.getTableByIndex(i).TableName);
             }
 
-            //List<Description> fields = tableManager.getFields(this.currentDbName, this.currentTableName);
-            //List<Data> data = tableManager.getTableData(this.currentDbName, this.currentTableName);
+            listBox1.SelectedIndex = 0;
 
-            for(int i = 0; i < db.Count; i++)
+            for(int i = 0; i < db.CountTables; i++)
             {
                 Table table = db.getTableByIndex(i);
 
                 List<Description> fields = tableManager.getFields(this.currentDbName, table.TableName);
-                List<Data> data = tableManager.getTableData(this.currentDbName, table.TableName);
+                List<Line> lines = tableManager.getTableData(this.currentDbName, table.TableName);
 
                 table.setFields(fields);
-                table.setData(data);
+                table.setLines(lines);
             }
 
         }
@@ -96,38 +95,29 @@ namespace DBMS
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             this.currentTableName = listBox1.SelectedItem.ToString();
-            
-            List<Description> fields = tableManager.getFields(this.currentDbName, this.currentTableName);
-            List<Data> data = tableManager.getTableData(this.currentDbName, this.currentTableName);
-
-            setColumns(fields);
-            setData(data);
+            setTable();
         }
 
-        private void setColumns(List<Description> fields) {
-
+        private void setTable()
+        {
             dataGridView1.Columns.Clear();
 
-            dataGridView1.ColumnCount = fields.Count;
-            for (int i = 0; i < fields.Count; i++)
+            Table table = db.getTableByName(this.currentTableName);
+
+            dataGridView1.ColumnCount = table.CountFields;
+
+            for (int i = 0; i < table.CountFields; i++)
             {
-                dataGridView1.Columns[i].Name = fields[i].getFieldName();
+                dataGridView1.Columns[i].Name = table.getFieldByIndex(i).FieldName;
             }
-        }
 
-        private void setData(List<Data> data)
-        {
-            
-            //dataGridView1.Rows.Add(str);
-
-            foreach(Data line in data)
+            for(int i = 0; i < table.CountLines; i++)
             {
-                List<string> fieldContent = line.getContent();
-                
-                dataGridView1.Rows.Add(fieldContent.ToArray());
+                string[] content = table.getLineByIndex(i).getContent().ToArray();
+                dataGridView1.Rows.Add(content);
             }
-        }
 
+        }
         private void consoleWrite(string str)
         {
             richTextBox1.Text += str;
