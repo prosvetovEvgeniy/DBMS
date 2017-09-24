@@ -9,7 +9,7 @@ namespace DBMS.Core.OwnTypes
     class Table
     {
         private string tableName;
-        private List<Line> lines;
+        private List<Row> rows;
         private List<Connections> connections;
         private List<Description> fields;
 
@@ -17,7 +17,7 @@ namespace DBMS.Core.OwnTypes
         {
             this.tableName = tableName;
 
-            lines = new List<Line>();
+            rows = new List<Row>();
             connections = new List<Connections>();
             fields = new List<Description>();
         }
@@ -28,15 +28,32 @@ namespace DBMS.Core.OwnTypes
             this.connections.Add(connection);
         }
 
+        public void addRow(List<string> rowContent)
+        {
+            Row addedRow = new Row();
+            for(int i = 0; i < rowContent.Count; i++)
+            {
+                addedRow.addField(this.fields[i].FieldName);
+                addedRow.addContent(rowContent[i]);
+            }
+
+            rows.Add(addedRow);
+        }
+        //removers
+
+        public void removeRowByIndex(int index)
+        {
+            rows.RemoveAt(index);
+        }
         //setters
         public void setTableName(string name)
         {
             this.tableName = name;
         }
     
-        public void setLines(List<Line> lines)
+        public void setRows(List<Row> rows)
         {
-            this.lines = lines;
+            this.rows = rows;
         }
 
         public void setFields(List<Description> fields)
@@ -45,9 +62,9 @@ namespace DBMS.Core.OwnTypes
         }
 
         //getters
-        public Line getLineByIndex(int index)
+        public Row getRowByIndex(int index)
         {
-            return lines[index];
+            return rows[index];
         }
         
         public Description getFieldByIndex(int index)
@@ -55,9 +72,9 @@ namespace DBMS.Core.OwnTypes
             return fields[index];
         }
 
-        public List<Line> getLines()
+        public List<Row> getRows()
         {
-            return lines;
+            return rows;
         }
 
         public List<Connections> getConnections()
@@ -80,9 +97,9 @@ namespace DBMS.Core.OwnTypes
             get { return fields.Count; }
         }
 
-        public int CountLines
+        public int CountRows
         {
-            get { return lines.Count; }
+            get { return rows.Count; }
         }
     }
 }

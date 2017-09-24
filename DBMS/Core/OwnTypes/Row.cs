@@ -6,30 +6,40 @@ using System.Threading.Tasks;
 
 namespace DBMS.Core.OwnTypes
 {
-    class Line
+    class Row
     {
         private List<string> fields;
-        private List<string> fieldContent;
+        private List<string> fieldsContent;
 
-        public Line()
+        public Row()
         {
             fields = new List<string>();
-            fieldContent = new List<string>();
+            fieldsContent = new List<string>();
         }
 
         public void addField(string field)
         {
             fields.Add(field);
         }
-        
+
         public void addContent(string content)
         {
-            fieldContent.Add(content);
+            fieldsContent.Add(content);
         }
 
+        public void setFields(List<string> fields)
+        {
+            this.fields = fields;
+        }
+        
+        public void setContent(List<string> fieldsContent)
+        {
+            this.fieldsContent = fieldsContent;
+        }
+       
         public List<string> getContent()
         {
-            return this.fieldContent;
+            return this.fieldsContent;
         }
 
         public List<string> getFields()

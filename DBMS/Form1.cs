@@ -13,16 +13,17 @@ using DBMS.Core.OwnTypes;
 
 namespace DBMS
 {
-    public partial class Form1 : Form
+    partial class Form1 : Form
     {
         private DbManager dbManager; //файловый менеджер
         private TableManager tableManager; //менеджер для работы с таблицами
-        private string currentDbName; //название выбранной бд
-        private string currentTableName; //название выбранной таблицы
-        private Database db;
-
+        public string currentDbName; //название выбранной бд
+        public string currentTableName; //название выбранной таблицы
+        public Database db;
+        
         public Form1()
         {
+
             InitializeComponent();
 
             dbManager = new DbManager();
@@ -30,6 +31,7 @@ namespace DBMS
             db = new Database();
             setDatabases();
         }
+        
         //загружает названия сущ. бд в comboBox
         private void setDatabases()
         {
@@ -63,23 +65,27 @@ namespace DBMS
             {
                 listBox1.Enabled = false;
             }
-
+            //заполняем таблицу столбцами
             for (int i = 0; i < db.CountTables; i++)
             {
                 listBox1.Items.Add(db.getTableByIndex(i).TableName);
             }
 
-            listBox1.SelectedIndex = 0;
+            if (db.CountTables != 0)
+            {
+                listBox1.SelectedIndex = 0;
+            }
 
+            //заполням таблицу данными
             for(int i = 0; i < db.CountTables; i++)
             {
                 Table table = db.getTableByIndex(i);
 
                 List<Description> fields = tableManager.getFields(this.currentDbName, table.TableName);
-                List<Line> lines = tableManager.getTableData(this.currentDbName, table.TableName);
+                List<Row> lines = tableManager.getTableData(this.currentDbName, table.TableName);
 
                 table.setFields(fields);
-                table.setLines(lines);
+                table.setRows(lines);
             }
 
         }
@@ -98,7 +104,7 @@ namespace DBMS
             setTable();
         }
 
-        private void setTable()
+        public void setTable()
         {
             dataGridView1.Columns.Clear();
 
@@ -111,12 +117,12 @@ namespace DBMS
                 dataGridView1.Columns[i].Name = table.getFieldByIndex(i).FieldName;
             }
 
-            for(int i = 0; i < table.CountLines; i++)
+            for(int i = 0; i < table.CountRows; i++)
             {
-                string[] content = table.getLineByIndex(i).getContent().ToArray();
+                string[] content = table.getRowByIndex(i).getContent().ToArray();
                 dataGridView1.Rows.Add(content);
             }
-
+            int a = 5;
         }
         private void consoleWrite(string str)
         {
@@ -134,7 +140,16 @@ namespace DBMS
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-
+            db.getTableByName(currentTableName).removeRowByIndex(dataGridView1.CurrentRow.Index);
+            setTable();
+        }
+        
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AddForm addForm = new AddForm();
+            addForm.Owner = this;
+            addForm.initOwner();
+            addForm.ShowDialog();
         }
     }
 }

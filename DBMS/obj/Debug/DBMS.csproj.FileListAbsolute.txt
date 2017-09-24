@@ -7,3 +7,4 @@ C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.Properties.Resources.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.csproj.GenerateResource.Cache
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.exe
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.pdb
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddForm.resources
