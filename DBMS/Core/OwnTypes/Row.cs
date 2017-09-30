@@ -50,6 +50,19 @@ namespace DBMS.Core.OwnTypes
             return fieldsContent[index];
         }
 
+        public string getContentByFieldName(string name)
+        {
+            for(int i = 0; i < fields.Count; i++)
+            {
+                if(fields[i] == name)
+                {
+                    return fieldsContent[i];
+                }
+            }
+
+            throw new Exception("Столбца с таким именем не существует");
+        }
+
         public int CountFields
         {
             get { return fields.Count; }
@@ -64,6 +77,5 @@ namespace DBMS.Core.OwnTypes
         {
             return this.fields;
         }
-
     }
 }

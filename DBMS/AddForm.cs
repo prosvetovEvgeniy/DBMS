@@ -70,7 +70,7 @@ namespace DBMS
                 {
                     owner.db.getTableByName(owner.currentTableName).addRow(rows[i]);
                 }
-                owner.db.getTableByName(owner.currentTableName).save(owner.currentDbName);
+                owner.db.getTableByName(owner.currentTableName).save();
                 owner.setTable();
                 Close();
             }

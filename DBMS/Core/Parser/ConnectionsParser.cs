@@ -26,7 +26,7 @@ namespace DBMS.Core.Parser
             {
                 string[] parsedData = separatedFields[i].Split(':');
 
-                connections.Add(new Connection(parsedData[0], tableName, parsedData[1], parsedData[2]));
+                connections.Add(new Connection(parsedData[0], tableName, parsedData[1], parsedData[2], parsedData[3]));
             }
 
             return connections;

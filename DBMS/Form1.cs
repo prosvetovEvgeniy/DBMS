@@ -149,12 +149,21 @@ namespace DBMS
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if(db.getTableByName(currentTableName).CountRows != 0)
-            {
-                db.getTableByName(currentTableName).removeRowByIndex(dataGridView1.CurrentRow.Index);
-                db.getTableByName(currentTableName).save(currentDbName);
+            Table table = db.getTableByName(currentTableName);
+            int numRow = dataGridView1.CurrentRow.Index;
 
-                setTable();
+            if (table.CountRows != 0)
+            {
+                if (db.checkConnectionsOnDelete(table.TableName, numRow))
+                {
+                    table.removeRowByIndex(numRow);
+                    table.save();
+                    setTable();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка");
+                }
             }
         }
         

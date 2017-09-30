@@ -27,7 +27,7 @@ namespace DBMS.Core.OwnTypes
         }
 
         //savers
-        public void save(string dbName)
+        public void save()
         {
             FileManager fm = new FileManager();
             string data = "";
@@ -136,5 +136,26 @@ namespace DBMS.Core.OwnTypes
         {
             get { return rows.Count; }
         }
+
+        public List<string> getDataByColumn(string columnName)
+        {
+            List<string> columnData = new List<string>();
+
+            foreach(Row row in rows)
+            {
+                List<string> columnNames= row.getFields();
+                List<string> content = row.getContent();
+
+                for(int i = 0; i < columnNames.Count; i++)
+                {
+                    if(columnNames[i] == columnName)
+                    {
+                        columnData.Add(content[i]);
+                    }
+                }
+            }
+
+            return columnData;
+        } 
     }
 }

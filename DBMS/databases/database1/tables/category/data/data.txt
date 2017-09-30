@@ -1,10 +1,10 @@
 {
-id:0
-name:Верхняя одежда
+id:1
+name:Куртки
 parent_id:0
 }
 {
-id:1
-name:Куртки
+id:0
+name:Верхняя одежда
 parent_id:0
 }

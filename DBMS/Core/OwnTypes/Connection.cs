@@ -12,13 +12,15 @@ namespace DBMS.Core.OwnTypes
         private string tableName;
         private string linkedColumn;
         private string linkedTableName;
+        private string connectionType;
 
-        public Connection(string column, string tableName, string linkedColumn, string linkedTableName)
+        public Connection(string column, string tableName, string linkedColumn, string linkedTableName, string connectionType)
         {
             this.column = column;
             this.tableName = tableName;
             this.linkedColumn = linkedColumn;
             this.linkedTableName = linkedTableName;
+            this.connectionType = connectionType;
         }
 
         public string Column
@@ -41,5 +43,9 @@ namespace DBMS.Core.OwnTypes
             get { return linkedTableName; }
         }
 
+        public string ConnectionType
+        {
+            get { return connectionType; }
+        }
     }
 }

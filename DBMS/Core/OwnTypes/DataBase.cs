@@ -16,6 +16,41 @@ namespace DBMS.Core.OwnTypes
             tables = new List<Table>();
         }
 
+        public bool checkConnectionsOnDelete(string tableName, int numRow)
+        {
+            
+            Table table = this.getTableByName(tableName);
+            List<Connection> connections = table.getConnections();
+
+            if (connections == null)
+            {
+                return true;
+            }
+
+            
+
+            foreach (Connection connection in connections)
+            {
+                Table linkedTable = this.getTableByName(connection.LinkedTableName);
+
+                List<string> dataByColumn = linkedTable.getDataByColumn(connection.LindkedColumn);
+                string valueForSearch = table.getRowByIndex(numRow).getContentByFieldName(connection.Column);
+
+                int a = 5;
+
+                if(connection.ConnectionType == "master")
+                {
+                    if (dataByColumn.Contains(valueForSearch))
+                    {
+                        return false;
+                    }
+                }
+                
+            }
+
+            return true;
+        }
+
         //setters
         public void setDbName(string dbName)
         {
