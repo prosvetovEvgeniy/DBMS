@@ -30,5 +30,13 @@ namespace DBMS.Core.Manager
 
             return dataParser.getTableData();
         }
+        
+        public List<Connection> getTableConnections(string dbName, string tableName)
+        {
+            string pathToFile = base.getPathToTableConnections(dbName, tableName);
+            ConnectionsParser connectionParser = new ConnectionsParser(pathToFile);
+
+            return connectionParser.getTableConnections(tableName);
+        }
     }
 }

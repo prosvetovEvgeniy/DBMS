@@ -11,16 +11,18 @@ namespace DBMS.Core.OwnTypes
     class Table
     {
         private string tableName;
+        private string dbName;
         private List<Row> rows;
-        private List<Connections> connections;
+        private List<Connection> connections;
         private List<Description> fields;
 
-        public Table(string tableName)
+        public Table(string tableName, string dbName)
         {
             this.tableName = tableName;
+            this.dbName = dbName;
 
             rows = new List<Row>();
-            connections = new List<Connections>();
+            connections = new List<Connection>();
             fields = new List<Description>();
         }
 
@@ -40,11 +42,11 @@ namespace DBMS.Core.OwnTypes
                 data += "}\r\n";
             }
 
-            System.IO.File.WriteAllText(fm.getPathToTableData(dbName, tableName), data);
+            File.WriteAllText(fm.getPathToTableData(dbName, tableName), data, System.Text.Encoding.GetEncoding(1251));
         }
 
         //adders
-        public void addConnection(Connections connection)
+        public void addConnection(Connection connection)
         {
             this.connections.Add(connection);
         }
@@ -89,6 +91,11 @@ namespace DBMS.Core.OwnTypes
             this.fields = fields;
         }
 
+        public void setConnections(List<Connection> connections)
+        {
+            this.connections = connections;
+        }
+
         //getters
         public Row getRowByIndex(int index)
         {
@@ -105,7 +112,7 @@ namespace DBMS.Core.OwnTypes
             return rows;
         }
 
-        public List<Connections> getConnections()
+        public List<Connection> getConnections()
         {
             return connections;
         }

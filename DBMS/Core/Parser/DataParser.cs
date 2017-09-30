@@ -19,7 +19,7 @@ namespace DBMS.Core.Parser
         public List<Row> getTableData()
         {
             List<Row> tableData = new List<Row>();
-            string data = File.ReadAllText(this.filePath, Encoding.Default);
+            string data = File.ReadAllText(this.filePath, System.Text.Encoding.GetEncoding(1251));
             string pattern = @"({\r\n)|(\r\n})";
 
             List<string> lines = Regex.Split(data, pattern).ToList();

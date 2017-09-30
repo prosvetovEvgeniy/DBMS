@@ -66,7 +66,7 @@ namespace DBMS.Core.OwnTypes
                     return table;
                 }
             }
-            return new Table("undefined");
+            return new Table("undefined", dbName);
         }
 
         public string Name {

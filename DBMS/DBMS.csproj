@@ -60,7 +60,7 @@
     <Compile Include="Core\Checker\TypeChecker.cs" />
     <Compile Include="Core\Manager\FileManager.cs" />
     <Compile Include="Core\Manager\DbManager.cs" />
-    <Compile Include="Core\OwnTypes\Connections.cs" />
+    <Compile Include="Core\OwnTypes\Connection.cs" />
     <Compile Include="Core\OwnTypes\Row.cs" />
     <Compile Include="Core\OwnTypes\Description.cs" />
     <Compile Include="Core\OwnTypes\Table.cs" />

@@ -28,7 +28,7 @@ namespace DBMS.Core.Manager
             return dirs;
         }
 
-        //повращает имена таблиц для определенной бд в виде строк
+        //возращает имена таблиц для определенной бд в виде строк
         public List<string> getTables(string dbName)
         {
             string pathToTables = this.dbPath + dbName + @"\tables\";

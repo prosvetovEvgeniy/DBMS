@@ -25,10 +25,10 @@ namespace DBMS
         {
 
             InitializeComponent();
-
             dbManager = new DbManager();
             tableManager = new TableManager();
             db = new Database();
+
             setDatabases();
         }
         
@@ -48,7 +48,7 @@ namespace DBMS
         }
 
         //загружает таблицы
-        private void setTable(string dbName)
+        private void setTables(string dbName)
         {
 
             db.clearTables();
@@ -60,7 +60,7 @@ namespace DBMS
             List<string> tableNames = dbManager.getTables(this.currentDbName);
 
             foreach(string name in tableNames){
-                this.db.addTable(new Table(name));
+                this.db.addTable(new Table(name, this.currentDbName));
             }
 
             if (db.CountTables == 0)
@@ -85,10 +85,13 @@ namespace DBMS
 
                 List<Description> fields = tableManager.getFields(this.currentDbName, table.TableName);
                 List<Row> lines = tableManager.getTableData(this.currentDbName, table.TableName);
+                List <Connection> connections = tableManager.getTableConnections(this.currentDbName, table.TableName);
 
                 table.setFields(fields);
                 table.setRows(lines);
+                table.setConnections(connections);
             }
+
 
         }
 
@@ -96,7 +99,7 @@ namespace DBMS
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             this.currentDbName = comboBox1.SelectedItem.ToString();
-            setTable(this.currentDbName);
+            setTables(this.currentDbName);
         }
 
         //срабатывает при изменении таблицы
