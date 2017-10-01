@@ -29,48 +29,76 @@ namespace DBMS
         private void setTable()
         {
             dataGridView1.Columns.Clear();
-
             Table table = owner.db.getTableByName(owner.currentTableName);
 
-            dataGridView1.ColumnCount = table.CountFields;
-
+            //устанавливаем столбцы для datagridview
             for (int i = 0; i < table.CountFields; i++)
             {
-                dataGridView1.Columns[i].Name = table.getFieldByIndex(i).FieldName + " (" + table.getFieldByIndex(i).FieldType + ")";
+                string fieldName = table.getFieldByIndex(i).FieldName;
+
+                //если какое то поле зависмое от другой таблицы делаем combobox
+                if (table.checkFieldHasSlaveConnection(fieldName))
+                {
+                    DataGridViewComboBoxColumn dgvComboBox = new DataGridViewComboBoxColumn();
+                    dgvComboBox.HeaderText = fieldName;
+
+                    Connection connection = table.getConnectionByColumnName(fieldName);
+                    List<string> dataByColumn = owner.db.getDataByColumnFromMasterTable(connection.LinkedTableName, connection.LindkedColumn);
+
+                    dgvComboBox.Items.AddRange(dataByColumn.ToArray());
+
+                    dataGridView1.Columns.Add(dgvComboBox);
+                }
+                else
+                {
+                    DataGridViewTextBoxColumn dgvTextBox = new DataGridViewTextBoxColumn();
+                    dgvTextBox.HeaderText = fieldName;
+                    dataGridView1.Columns.Add(dgvTextBox);
+                }
             }
 
-            for (int i = 0; i < table.CountRows; i++)
+            //считываем данные в datagridview
+            for(int i = 0; i < table.CountRows; i++)
             {
-                string[] content = table.getRowByIndex(i).getContent().ToArray();
-                dataGridView1.Rows.Add(content);
+                dataGridView1.Rows.Add(table.getRowByIndex(i).getContent().ToArray());
             }
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
-
             List<List<string>> rows = new List<List<string>>();
 
+            //считываем данные из datagridview в матрицу
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 List<string> row = new List<string>();
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
                 {
-                    if (dataGridView1[j, i].Value == null)
-                    {
-                        row.Add("");
-                    }
-                    else
-                    {
-                        row.Add(dataGridView1[j, i].Value.ToString());
-                    }
+                    Type type = dataGridView1.Rows[i].Cells[j].GetType();
+                    var cell = dataGridView1.Rows[i].Cells[j];
 
+                    if (type.Name == "DataGridViewTextBoxCell")
+                    {
+                        if (cell.Value == null)
+                        {
+                            row.Add("");
+                        }
+                        else
+                        {
+                            row.Add((cell as DataGridViewTextBoxCell).FormattedValue.ToString());
+                        }
+                    }
+                    else if (type.Name == "DataGridViewComboBoxCell")
+                    {
+                        row.Add((cell as DataGridViewComboBoxCell).FormattedValue.ToString());
+                    }
                 }
                 rows.Add(row);
             }
 
             Table table = owner.db.getTableByName(owner.currentTableName);
-
+            //проверяем совпадают ли данные с их типами и заполняем таблицу данными
             if (TypeChecker.checkTypes(rows, table))
             {
                 owner.db.getTableByName(owner.currentTableName).removeAllRows();

@@ -4,3 +4,9 @@ category_id:1
 name:Куртка
 price:9200
 }
+{
+id:1
+category_id:1
+name:Пуховик
+price:15000
+}

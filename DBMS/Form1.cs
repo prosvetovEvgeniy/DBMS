@@ -154,7 +154,9 @@ namespace DBMS
 
             if (table.CountRows != 0)
             {
-                if (db.checkConnectionsOnDelete(table.TableName, numRow))
+                string check = db.checkConnectionsOnDelete(table.TableName, numRow);
+
+                if (check == "")
                 {
                     table.removeRowByIndex(numRow);
                     table.save();
@@ -162,7 +164,7 @@ namespace DBMS
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка");
+                    MessageBox.Show("Cannot delete a parent row: a foreign key constraint fails" + check);
                 }
             }
         }

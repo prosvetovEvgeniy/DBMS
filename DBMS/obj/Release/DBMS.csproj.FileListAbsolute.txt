@@ -7,3 +7,4 @@ C:\Users\medve\Desktop\DBMS\DBMS\obj\Release\DBMS.Properties.Resources.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Release\DBMS.csproj.GenerateResource.Cache
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Release\DBMS.exe
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Release\DBMS.pdb
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Release\DBMS.ChangeForm.resources

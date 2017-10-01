@@ -25,6 +25,19 @@ namespace DBMS.Core.OwnTypes
             connections = new List<Connection>();
             fields = new List<Description>();
         }
+        
+        public bool checkFieldHasSlaveConnection(string fieldName)
+        {
+            foreach(Connection connection in connections)
+            {
+                if(connection.Column == fieldName && connection.ConnectionType == "slave")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         //savers
         public void save()
@@ -157,5 +170,18 @@ namespace DBMS.Core.OwnTypes
 
             return columnData;
         } 
+
+        public Connection getConnectionByColumnName(string columnName)
+        {
+            foreach(Connection connection in connections)
+            {
+                if(connection.Column == columnName)
+                {
+                    return connection;
+                }
+            }
+
+            return null;
+        }
     }
 }
