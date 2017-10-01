@@ -15,6 +15,9 @@ namespace DBMS
     public partial class ChangeForm : Form
     {
         private Form1 owner;
+        private Database db;
+        private string tableName;
+
         public ChangeForm()
         {
             InitializeComponent();
@@ -23,13 +26,17 @@ namespace DBMS
         public void initOwner()
         {
             owner = this.Owner as Form1;
+
+            db = owner.getDb();
+            tableName = owner.getTableName();
+
             setTable();
         }
 
         private void setTable()
         {
             dataGridView1.Columns.Clear();
-            Table table = owner.db.getTableByName(owner.currentTableName);
+            Table table = db.getTableByName(tableName);
 
             //устанавливаем столбцы для datagridview
             for (int i = 0; i < table.CountFields; i++)
@@ -43,7 +50,7 @@ namespace DBMS
                     dgvComboBox.HeaderText = fieldName;
 
                     Connection connection = table.getConnectionByColumnName(fieldName);
-                    List<string> dataByColumn = owner.db.getDataByColumnFromMasterTable(connection.LinkedTableName, connection.LindkedColumn);
+                    List<string> dataByColumn = db.getDataByColumnFromMasterTable(connection.LinkedTableName, connection.LindkedColumn);
 
                     dgvComboBox.Items.AddRange(dataByColumn.ToArray());
 
@@ -97,17 +104,17 @@ namespace DBMS
                 rows.Add(row);
             }
 
-            Table table = owner.db.getTableByName(owner.currentTableName);
+            Table table = db.getTableByName(tableName);
             //проверяем совпадают ли данные с их типами и заполняем таблицу данными
             if (TypeChecker.checkTypes(rows, table))
             {
-                owner.db.getTableByName(owner.currentTableName).removeAllRows();
+                db.getTableByName(tableName).removeAllRows();
                 for (int i = 0; i < rows.Count; i++)
                 {
-                    owner.db.getTableByName(owner.currentTableName).addRow(rows[i]);
+                    db.getTableByName(tableName).addRow(rows[i]);
                 }
 
-                owner.db.getTableByName(owner.currentTableName).save();
+                db.getTableByName(tableName).save();
                 owner.setTable();
                 Close();
             }

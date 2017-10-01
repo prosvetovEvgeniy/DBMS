@@ -17,10 +17,10 @@ namespace DBMS
     {
         private DbManager dbManager; //файловый менеджер
         private TableManager tableManager; //менеджер для работы с таблицами
-        public string currentDbName; //название выбранной бд
-        public string currentTableName; //название выбранной таблицы
-        public Database db;
-        
+        private string currentDbName; //название выбранной бд
+        private string currentTableName; //название выбранной таблицы
+        private Database db;
+
         public Form1()
         {
 
@@ -31,7 +31,7 @@ namespace DBMS
 
             setDatabases();
         }
-        
+
         //загружает названия сущ. бд в comboBox
         private void setDatabases()
         {
@@ -59,7 +59,7 @@ namespace DBMS
 
             List<string> tableNames = dbManager.getTables(this.currentDbName);
 
-            foreach(string name in tableNames){
+            foreach (string name in tableNames) {
                 this.db.addTable(new Table(name, this.currentDbName));
             }
 
@@ -79,13 +79,13 @@ namespace DBMS
             }
 
             //заполням таблицу данными
-            for(int i = 0; i < db.CountTables; i++)
+            for (int i = 0; i < db.CountTables; i++)
             {
                 Table table = db.getTableByIndex(i);
 
                 List<Description> fields = tableManager.getFields(this.currentDbName, table.TableName);
                 List<Row> lines = tableManager.getTableData(this.currentDbName, table.TableName);
-                List <Connection> connections = tableManager.getTableConnections(this.currentDbName, table.TableName);
+                List<Connection> connections = tableManager.getTableConnections(this.currentDbName, table.TableName);
 
                 table.setFields(fields);
                 table.setRows(lines);
@@ -122,7 +122,7 @@ namespace DBMS
                 dataGridView1.Columns[i].Name = table.getFieldByIndex(i).FieldName;
             }
 
-            for(int i = 0; i < table.CountRows; i++)
+            for (int i = 0; i < table.CountRows; i++)
             {
                 string[] content = table.getRowByIndex(i).getContent().ToArray();
                 dataGridView1.Rows.Add(content);
@@ -164,14 +164,32 @@ namespace DBMS
                 }
                 else
                 {
-                    MessageBox.Show("Cannot delete a parent row: a foreign key constraint fails" + check);
+                    MessageBox.Show(check);
                 }
             }
         }
-        
+
+        public Database getDb()
+        {
+            return db;
+        }
+
+        public string getTableName()
+        {
+            return currentTableName;
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             AddForm addForm = new AddForm();
+            addForm.Owner = this;
+            addForm.initOwner();
+            addForm.ShowDialog();
+        }
+
+        private void структураToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StructureInterface addForm = new StructureInterface();
             addForm.Owner = this;
             addForm.initOwner();
             addForm.ShowDialog();

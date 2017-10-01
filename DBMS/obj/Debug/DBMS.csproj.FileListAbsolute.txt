@@ -1,7 +1,6 @@
 C:\Users\medve\Desktop\DBMS\DBMS\bin\Debug\DBMS.exe.config
 C:\Users\medve\Desktop\DBMS\DBMS\bin\Debug\DBMS.exe
 C:\Users\medve\Desktop\DBMS\DBMS\bin\Debug\DBMS.pdb
-C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.csprojResolveAssemblyReference.cache
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.Form1.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.Properties.Resources.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.csproj.GenerateResource.Cache
@@ -9,3 +8,4 @@ C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.exe
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.pdb
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddForm.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ChangeForm.resources
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.StructureInterface.resources
