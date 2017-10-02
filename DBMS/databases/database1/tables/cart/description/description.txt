@@ -1,1 +1,1 @@
-id:integer,user_id:integer
+id:integer:PRIMARY_KEY,user_id:integer

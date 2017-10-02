@@ -1,1 +1,1 @@
-id:integer,category_id:integer,name:string,price:integer
+id:integer:PRIMARY_KEY,category_id:integer,name:string,price:integer

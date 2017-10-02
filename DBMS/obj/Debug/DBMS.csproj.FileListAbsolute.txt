@@ -8,4 +8,6 @@ C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.exe
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.pdb
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddForm.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ChangeForm.resources
-C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.StructureInterface.resources
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.csprojResolveAssemblyReference.cache
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ConnectionsForm.resources
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.StructureForm.resources

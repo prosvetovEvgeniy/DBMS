@@ -10,13 +10,15 @@ namespace DBMS.Core.OwnTypes
     {
         private string fieldName;
         private string fieldType;
-        private bool nullState;
+        private bool primaryKey;
+        //private bool nullState;
 
-        public Description(string fieldName, string fieldType, bool nullState = true)
+        public Description(string fieldName, string fieldType, bool primaryKey = false)
         {
             this.fieldName = fieldName;
             this.fieldType = fieldType;
-            this.nullState = nullState;
+            this.primaryKey = primaryKey;
+            //this.nullState = nullState;
         }
 
         public string FieldName {
@@ -28,9 +30,13 @@ namespace DBMS.Core.OwnTypes
             get { return fieldType; }
         }
 
-        public bool FieldNullState
+        public bool PrimaryKey
+        {
+            get { return primaryKey; }
+        }
+        /*public bool FieldNullState
         {
             get { return nullState; }
-        }
+        }*/
     }
 }

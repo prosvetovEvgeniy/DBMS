@@ -91,8 +91,6 @@ namespace DBMS
                 table.setRows(lines);
                 table.setConnections(connections);
             }
-
-
         }
 
         //срабатывает при изменении базы данных
@@ -189,7 +187,15 @@ namespace DBMS
 
         private void структураToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StructureInterface addForm = new StructureInterface();
+            StructureForm addForm = new StructureForm();
+            addForm.Owner = this;
+            addForm.initOwner();
+            addForm.ShowDialog();
+        }
+
+        private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConnectionsForm addForm = new ConnectionsForm();
             addForm.Owner = this;
             addForm.initOwner();
             addForm.ShowDialog();

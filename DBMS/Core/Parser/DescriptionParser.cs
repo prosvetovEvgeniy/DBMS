@@ -27,15 +27,17 @@ namespace DBMS.Core.Parser
             {
                 string[] parsedData = separatedFields[i].Split(':');
 
+
+
                 if (parsedData.Length == 3)
                 {
-                    bool nullState = false;
-                    if(parsedData[2] == "DEFAULT_NULL")
+                    bool primaryKey = false;
+                    if(parsedData[2] == "PRIMARY_KEY")
                     {
-                        nullState = true;
+                        primaryKey = true;
                     }
 
-                    fields.Add(new Description(parsedData[0], parsedData[1], nullState));
+                    fields.Add(new Description(parsedData[0], parsedData[1], primaryKey));
                 }
                 else if(parsedData.Length == 2)
                 {

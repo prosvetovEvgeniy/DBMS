@@ -130,6 +130,11 @@ namespace DBMS.Core.OwnTypes
             return connections;
         }
 
+        public Connection getConnectionByIndex(int index)
+        {
+            return connections[index];
+        }
+
         public List<Description> getFields()
         {
             return fields;
@@ -148,6 +153,11 @@ namespace DBMS.Core.OwnTypes
         public int CountRows
         {
             get { return rows.Count; }
+        }
+
+        public int CountConnections
+        {
+            get { return connections.Count; }
         }
 
         public List<string> getDataByColumn(string columnName)

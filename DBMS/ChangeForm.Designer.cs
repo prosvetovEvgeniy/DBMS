@@ -56,9 +56,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(146, 255);
+            this.button2.Location = new System.Drawing.Point(134, 254);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(72, 34);
+            this.button2.Size = new System.Drawing.Size(116, 34);
             this.button2.TabIndex = 2;
             this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;

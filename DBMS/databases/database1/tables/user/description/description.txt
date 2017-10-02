@@ -1,1 +1,1 @@
-id:integer,name:string,phone:string
+id:integer:PRIMARY_KEY,name:string,phone:string
