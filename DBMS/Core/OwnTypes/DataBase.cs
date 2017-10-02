@@ -15,7 +15,7 @@ namespace DBMS.Core.OwnTypes
         {
             tables = new List<Table>();
         }
-
+        //checkers
         public string checkConnectionsOnDelete(string tableName, int numRow)
         {
             Table table = this.getTableByName(tableName);
@@ -90,6 +90,22 @@ namespace DBMS.Core.OwnTypes
             return "";
         }
 
+        public bool checkTableHasPK(string tableName)
+        {
+            Table table = getTableByName(tableName);
+
+            List<Description> fields = table.getFields();
+
+            foreach(Description field in fields)
+            {
+                if (field.PrimaryKey)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         //setters
         public void setDbName(string dbName)
         {
@@ -129,6 +145,21 @@ namespace DBMS.Core.OwnTypes
         public Table getTableByIndex(int index)
         {
             return tables[index];
+        }
+
+        public List<string> getTableNamesWithPK()
+        {
+            List<string> tableNames = new List<string>();
+
+            foreach (Table table in tables)
+            {
+                if (table.hasPK())
+                {
+                    tableNames.Add(table.TableName);
+                }
+            }
+
+            return tableNames;
         }
 
         public Table getTableByName(string name)
@@ -179,5 +210,7 @@ namespace DBMS.Core.OwnTypes
 
             return dataByColumn;
         }
+
+
     }
 }

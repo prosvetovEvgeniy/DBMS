@@ -194,6 +194,7 @@ namespace DBMS.Core.OwnTypes
             return null;
         }
 
+        //has
         public bool hasFieldsWithoutForeignKey()
         {
             foreach(Description field in fields)
@@ -214,6 +215,18 @@ namespace DBMS.Core.OwnTypes
                     {
                         return true;
                     }
+                }
+            }
+            return false;
+        }
+
+        public bool hasPK()
+        {
+            foreach(Description field in fields)
+            {
+                if (field.PrimaryKey)
+                {
+                    return true;
                 }
             }
 

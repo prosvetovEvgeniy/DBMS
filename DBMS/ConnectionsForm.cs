@@ -40,8 +40,6 @@ namespace DBMS
             DataGridViewComboBoxColumn dgvComboBoxColumn = new DataGridViewComboBoxColumn();
             dgvComboBoxColumn.HeaderText = "Поле";
 
-            DataGridViewTextBoxColumn dgvTableName = new DataGridViewTextBoxColumn();
-            dgvTableName.HeaderText = "Название таблицы";
 
             DataGridViewComboBoxColumn dgvComboBoxLinkedTable = new DataGridViewComboBoxColumn();
             dgvComboBoxLinkedTable.HeaderText = "Ссылающ. таблица";
@@ -61,9 +59,10 @@ namespace DBMS
                 }
             }
             //получаем список всех таблиц
-            dgvComboBoxLinkedTable.Items.AddRange(db.getTableNames().ToArray());
 
-            dataGridView1.Columns.AddRange(dgvComboBoxColumn, dgvTableName, dgvComboBoxLinkedTable, dgvComboBoxLinkedColumn);
+            dgvComboBoxLinkedTable.Items.AddRange(db.getTableNamesWithPK().ToArray());
+
+            dataGridView1.Columns.AddRange(dgvComboBoxColumn, dgvComboBoxLinkedTable, dgvComboBoxLinkedColumn);
 
             //заполняем данными
             for (int i = 0; i < table.CountConnections; i++)
@@ -74,16 +73,21 @@ namespace DBMS
                 {
                     List<string> list = connection.getConnectionsAsList();
 
-                    dataGridView1.Rows.Add(connection.getConnectionsAsList().ToArray());
+                    string column = connection.Column;
+                    string linkedTable = connection.LinkedTableName;
+                    string linkedColumn = connection.LindkedColumn;
+
+                    dataGridView1.Rows.Add(column, linkedTable, linkedColumn);
                 }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //dataGridView1.RowCount++;
-            bool b = table.hasFieldsWithoutForeignKey();
-            int a = 5;
+            if (table.hasFieldsWithoutForeignKey())
+            {
+                dataGridView1.RowCount++;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
