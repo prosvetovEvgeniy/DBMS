@@ -193,5 +193,31 @@ namespace DBMS.Core.OwnTypes
 
             return null;
         }
+
+        public bool hasFieldsWithoutForeignKey()
+        {
+            foreach(Description field in fields)
+            {
+                bool flag = true;
+
+                if (!field.PrimaryKey)
+                {
+                    foreach (Connection connection in connections)
+                    {
+                        if (field.FieldName == connection.Column)
+                        {
+                            flag = false;
+                        }
+                    }
+
+                    if (flag)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

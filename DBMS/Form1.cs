@@ -91,6 +91,8 @@ namespace DBMS
                 table.setRows(lines);
                 table.setConnections(connections);
             }
+            
+
         }
 
         //срабатывает при изменении базы данных

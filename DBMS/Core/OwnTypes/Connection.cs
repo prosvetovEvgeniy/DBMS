@@ -13,6 +13,8 @@ namespace DBMS.Core.OwnTypes
         private string linkedColumn;
         private string linkedTableName;
         private string connectionType;
+        private bool isMaster;
+        private bool isSlave;
 
         public Connection(string column, string tableName, string linkedColumn, string linkedTableName, string connectionType)
         {
@@ -21,8 +23,20 @@ namespace DBMS.Core.OwnTypes
             this.linkedColumn = linkedColumn;
             this.linkedTableName = linkedTableName;
             this.connectionType = connectionType;
+
+            if(this.connectionType == "slave")
+            {
+                isMaster = false;
+                isSlave = true;
+            }
+            else if(this.connectionType == "master")
+            {
+                isMaster = true;
+                isSlave = false;
+            }
         }
 
+        //getters
         public string Column
         {
             get { return column; }
@@ -46,6 +60,28 @@ namespace DBMS.Core.OwnTypes
         public string ConnectionType
         {
             get { return connectionType; }
+        }
+
+        public bool IsMaster
+        {
+            get { return isMaster; }
+        }
+
+        public bool IsSlave
+        {
+            get { return isSlave; }
+        }
+
+        public List<string> getConnectionsAsList()
+        {
+            List<string> list = new List<string>();
+
+            list.Add(column);
+            list.Add(tableName);
+            list.Add(linkedTableName);
+            list.Add(linkedColumn);
+
+            return list;
         }
     }
 }

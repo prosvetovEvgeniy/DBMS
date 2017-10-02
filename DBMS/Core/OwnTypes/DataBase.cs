@@ -143,6 +143,18 @@ namespace DBMS.Core.OwnTypes
             return new Table("undefined", dbName);
         }
 
+        public List<string> getTableNames()
+        {
+            List<string> tableNames = new List<string>();
+
+            foreach(Table table in tables)
+            {
+                tableNames.Add(table.TableName);
+            }
+
+            return tableNames;
+        }
+
         public string Name {
             get { return this.dbName; }
         }

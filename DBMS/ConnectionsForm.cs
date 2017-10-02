@@ -16,6 +16,7 @@ namespace DBMS
         private Form1 owner;
         private string tableName;
         private Database db;
+        private Table table;
 
         public ConnectionsForm()
         {
@@ -28,12 +29,14 @@ namespace DBMS
 
             db = owner.getDb();
             tableName = owner.getTableName();
+            table = db.getTableByName(tableName);
 
             setColumns();
         }
 
         private void setColumns()
         {
+            //создаем поля datagridview
             DataGridViewComboBoxColumn dgvComboBoxColumn = new DataGridViewComboBoxColumn();
             dgvComboBoxColumn.HeaderText = "Поле";
 
@@ -46,21 +49,41 @@ namespace DBMS
             DataGridViewComboBoxColumn dgvComboBoxLinkedColumn = new DataGridViewComboBoxColumn();
             dgvComboBoxLinkedColumn.HeaderText = "Ссылающ. поле";
 
-            Table table = db.getTableByName(tableName);
-
-            /*for(int i = 0; i < table.CountConnections; i++)
+            //считываем поле внешнего ключа
+            for(int i = 0; i < table.CountConnections; i++)
             {
                 Connection connection = table.getConnectionByIndex(i);
 
-                dgvComboBoxColumn.Items.AddRange(connection.Column);
-            }*/
+                if (connection.IsSlave)
+                {
+                    dgvComboBoxColumn.Items.AddRange(connection.Column);
+                    dgvComboBoxLinkedColumn.Items.Add(connection.LindkedColumn);
+                }
+            }
+            //получаем список всех таблиц
+            dgvComboBoxLinkedTable.Items.AddRange(db.getTableNames().ToArray());
 
             dataGridView1.Columns.AddRange(dgvComboBoxColumn, dgvTableName, dgvComboBoxLinkedTable, dgvComboBoxLinkedColumn);
+
+            //заполняем данными
+            for (int i = 0; i < table.CountConnections; i++)
+            {
+                Connection connection = table.getConnectionByIndex(i);
+
+                if (connection.IsSlave)
+                {
+                    List<string> list = connection.getConnectionsAsList();
+
+                    dataGridView1.Rows.Add(connection.getConnectionsAsList().ToArray());
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //dataGridView1.RowCount++;
+            bool b = table.hasFieldsWithoutForeignKey();
+            int a = 5;
         }
 
         private void button3_Click(object sender, EventArgs e)
