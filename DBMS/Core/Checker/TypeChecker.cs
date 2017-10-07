@@ -21,27 +21,33 @@ namespace DBMS.Core.Checker
                 int i = 0;
                 foreach(string cell in row)
                 {
-                    if(table.getFieldByIndex(i).FieldType == "integer")
+                    Description field = table.getFieldByIndex(i);
+
+                    if(cell == "")
                     {
-                        if(!(Regex.IsMatch(cell, INTEGER_PATTERN)))
+                        if (field.NotNULL)
                         {
                             return false;
                         }
                     }
-                    else if(table.getFieldByIndex(i).FieldType == "float")
+                    else
                     {
-                        if (!(Regex.IsMatch(cell, FLOAT_PATTERN)))
+                        if (field.FieldType == Description.INTEGER_TYPE)
                         {
-                            return false;
+                            if (!(Regex.IsMatch(cell, INTEGER_PATTERN)))
+                            {
+                                return false;
+                            }
+                        }
+                        else if (field.FieldType == Description.STRING_TYPE)
+                        {
+                            if (!(Regex.IsMatch(cell, STRING_PATTERN)))
+                            {
+                                return false;
+                            }
                         }
                     }
-                    else if(table.getFieldByIndex(i).FieldType == "string")
-                    {
-                        if (!(Regex.IsMatch(cell, STRING_PATTERN)))
-                        {
-                            return false;
-                        }
-                    }
+
                     i++;
                 }
             }

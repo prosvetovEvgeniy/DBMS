@@ -1,0 +1,1 @@
+id:integer:NOT_NULL:PRIMARY_KEY,user_id:integer:DEFAULT_NULL:INDEX,product_id:integer:DEFAULT_NULL:INDEX,category_id:integer:DEFAULT_NULL:INDEX,test:string:DEFAULT_NULL

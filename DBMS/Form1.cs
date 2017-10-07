@@ -91,7 +91,6 @@ namespace DBMS
                 table.setRows(lines);
                 table.setConnections(connections);
             }
-            
 
         }
 
@@ -125,6 +124,15 @@ namespace DBMS
             for (int i = 0; i < table.CountRows; i++)
             {
                 string[] content = table.getRowByIndex(i).getContent().ToArray();
+
+                for(int j = 0; j < content.Length; j++)
+                {
+                    if(content[j] == "")
+                    {
+                        content[j] = "NULL";
+                    }
+                }
+
                 dataGridView1.Rows.Add(content);
             }
 
@@ -201,6 +209,11 @@ namespace DBMS
             addForm.Owner = this;
             addForm.initOwner();
             addForm.ShowDialog();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

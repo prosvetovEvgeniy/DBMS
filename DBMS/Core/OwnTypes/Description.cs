@@ -8,17 +8,36 @@ namespace DBMS.Core.OwnTypes
 {
     class Description
     {
+        public const string INTEGER_TYPE = "integer";
+        public const string STRING_TYPE = "string";
+        public const string PK = "PRIMARY_KEY";
+        public const string INDEX = "INDEX";
+        public const string NOT_NULL = "NOT_NULL";
+        public const string DEFAULT_NULL = "DEFAULT_NULL";
+
         private string fieldName;
         private string fieldType;
         private bool primaryKey;
-        //private bool nullState;
+        private bool index;
+        private bool defaultNull;
+        private bool notNull;
 
-        public Description(string fieldName, string fieldType, bool primaryKey = false)
+        public Description(string fieldName, string fieldType, bool primaryKey = false, bool index = false)
         {
             this.fieldName = fieldName;
             this.fieldType = fieldType;
             this.primaryKey = primaryKey;
-            //this.nullState = nullState;
+            this.index = index;
+        }
+
+        public void setDefaultNull(bool defaultNull)
+        {
+            this.defaultNull = defaultNull;
+        }
+
+        public void setNotNull(bool notNull)
+        {
+            this.notNull = notNull;
         }
 
         public string FieldName {
@@ -34,9 +53,20 @@ namespace DBMS.Core.OwnTypes
         {
             get { return primaryKey; }
         }
-        /*public bool FieldNullState
+
+        public bool Index
         {
-            get { return nullState; }
-        }*/
+            get { return index; }
+        }
+
+        public bool DefaultNULL
+        {
+            get { return defaultNull; }
+        }
+
+        public bool NotNULL
+        {
+            get { return notNull; }
+        }
     }
 }

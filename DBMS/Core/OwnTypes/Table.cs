@@ -191,7 +191,7 @@ namespace DBMS.Core.OwnTypes
                 }
             }
 
-            return null;
+            throw new Exception("Связей не найдено");
         }
         
         public List<string> getFieldsWithoutConnections()
@@ -202,7 +202,7 @@ namespace DBMS.Core.OwnTypes
             {
                 bool flag = true;
 
-                if (!field.PrimaryKey)
+                if (!field.PrimaryKey && field.Index)
                 {
                     foreach (Connection connection in connections)
                     {
@@ -223,6 +223,34 @@ namespace DBMS.Core.OwnTypes
             return names;
         }
 
+        public string getPrimaryKeyName()
+        {
+            foreach(Description field in fields)
+            {
+                if (field.PrimaryKey)
+                {
+                    return field.FieldName;
+                }
+            }
+
+            throw new Exception("Таблица не имеет первичного ключа");
+        }
+
+        public List<string> getSuitableFieldsForConnections()
+        {
+            List<string> suitableFields = new List<string>();
+
+            foreach(Description field in fields)
+            {
+                if(field.PrimaryKey || field.Index)
+                {
+                    suitableFields.Add(field.FieldName);
+                }
+            }
+
+            return suitableFields;
+        }
+
         //has
         public bool hasFieldsWithoutForeignKey()
         {
@@ -230,7 +258,7 @@ namespace DBMS.Core.OwnTypes
             {
                 bool flag = true;
 
-                if (!field.PrimaryKey)
+                if (!field.PrimaryKey && field.Index)
                 {
                     foreach (Connection connection in connections)
                     {

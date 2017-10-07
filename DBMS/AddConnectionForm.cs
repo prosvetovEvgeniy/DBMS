@@ -55,5 +55,23 @@ namespace DBMS
         {
 
         }
+
+        private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            comboBox3.Items.Clear();
+
+            string selectedTableName = comboBox2.SelectedItem.ToString();
+
+            comboBox3.Items.AddRange(db.getTableByName(selectedTableName).getSuitableFieldsForConnections().ToArray());
+
+            if(comboBox3.Items.Count > 0)
+            {
+                comboBox3.SelectedIndex = 0;
+            }
+            else
+            {
+                throw new Exception("У таблицые нет подходящих полей для связывания");
+            }
+        }
     }
 }

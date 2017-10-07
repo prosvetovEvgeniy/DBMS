@@ -31,55 +31,13 @@ namespace DBMS
             tableName = owner.getTableName();
             table = db.getTableByName(tableName);
 
+            label1.Text = table.TableName;
+
             setColumns();
         }
 
         private void setColumns()
         {
-            //создаем поля datagridview
-            /*DataGridViewComboBoxColumn dgvComboBoxColumn = new DataGridViewComboBoxColumn();
-            dgvComboBoxColumn.HeaderText = "Поле";
-
-            DataGridViewComboBoxColumn dgvComboBoxLinkedTable = new DataGridViewComboBoxColumn();
-            dgvComboBoxLinkedTable.HeaderText = "Ссылающ. таблица";
-
-            DataGridViewComboBoxColumn dgvComboBoxLinkedColumn = new DataGridViewComboBoxColumn();
-            dgvComboBoxLinkedColumn.HeaderText = "Ссылающ. поле";
-
-            //считываем поле внешнего ключа
-            for(int i = 0; i < table.CountConnections; i++)
-            {
-                Connection connection = table.getConnectionByIndex(i);
-
-                if (connection.IsSlave)
-                {
-                    dgvComboBoxColumn.Items.AddRange(connection.Column);
-                    dgvComboBoxLinkedColumn.Items.Add(connection.LindkedColumn);
-                }
-            }
-
-            //получаем список всех таблиц
-            dgvComboBoxLinkedTable.Items.AddRange(db.getTableNamesWithPK().ToArray());
-
-            dataGridView1.Columns.AddRange(dgvComboBoxColumn, dgvComboBoxLinkedTable, dgvComboBoxLinkedColumn);
-
-            //заполняем данными
-            for (int i = 0; i < table.CountConnections; i++)
-            {
-                Connection connection = table.getConnectionByIndex(i);
-
-                if (connection.IsSlave)
-                {
-                    List<string> list = connection.getConnectionsAsList();
-
-                    string column = connection.Column;
-                    string linkedTable = connection.LinkedTableName;
-                    string linkedColumn = connection.LindkedColumn;
-                
-                    dataGridView1.Rows.Add(column, linkedTable, linkedColumn);
-                }
-            }*/
-
             dataGridView1.Columns.Clear();
 
             Table table = db.getTableByName(tableName);
@@ -114,7 +72,7 @@ namespace DBMS
             }
             else
             {
-                MessageBox.Show("У таблица не осталось полей без связей");
+                MessageBox.Show("У таблицы не осталось полей без связей");
             }
         }
         public Database getDb()

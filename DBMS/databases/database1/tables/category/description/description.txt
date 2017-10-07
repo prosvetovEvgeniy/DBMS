@@ -1,1 +1,1 @@
-id:integer:PRIMARY_KEY,name:string,parent_id:string
+id:integer:NOT_NULL:PRIMARY_KEY,name:string:DEFAULT_NULL,parent_id:integer:DEFAULT_NULL
