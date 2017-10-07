@@ -41,25 +41,33 @@ namespace DBMS
             //устанавливаем столбцы для datagridview
             for (int i = 0; i < table.CountFields; i++)
             {
-                string fieldName = table.getFieldByIndex(i).FieldName;
+                Description field = table.getFieldByIndex(i);
 
                 //если какое то поле зависмое от другой таблицы делаем combobox
-                if (table.checkFieldHasSlaveConnection(fieldName))
+                if (table.checkFieldHasSlaveConnection(field.FieldName))
                 {
                     DataGridViewComboBoxColumn dgvComboBox = new DataGridViewComboBoxColumn();
-                    dgvComboBox.HeaderText = fieldName;
+                    dgvComboBox.HeaderText = field.FieldName;
 
-                    Connection connection = table.getConnectionByColumnName(fieldName);
+                    Connection connection = table.getConnectionByColumnName(field.FieldName);
                     List<string> dataByColumn = db.getDataByColumnFromMasterTable(connection.LinkedTableName, connection.LindkedColumn);
 
-                    dgvComboBox.Items.AddRange(dataByColumn.ToArray());
+                    if (field.DefaultNULL)
+                    {
+                        dgvComboBox.Items.Add("");
+                        dgvComboBox.Items.AddRange(dataByColumn.ToArray());
+                    }
+                    else
+                    {
+                        dgvComboBox.Items.AddRange(dataByColumn.ToArray());
+                    }
 
                     dataGridView1.Columns.Add(dgvComboBox);
                 }
                 else
                 {
                     DataGridViewTextBoxColumn dgvTextBox = new DataGridViewTextBoxColumn();
-                    dgvTextBox.HeaderText = fieldName;
+                    dgvTextBox.HeaderText = field.FieldName;
                     dataGridView1.Columns.Add(dgvTextBox);
                 }
             }

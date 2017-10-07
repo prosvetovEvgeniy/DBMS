@@ -120,6 +120,19 @@ namespace DBMS.Core.OwnTypes
             return fields[index];
         }
 
+        public Description getFieldByName(string name)
+        {
+            foreach(Description field in fields)
+            {
+                if(field.FieldName == name)
+                {
+                    return field;
+                }
+            }
+
+            throw new Exception("Запрашивается не существующий столбец");
+        }
+
         public List<Row> getRows()
         {
             return rows;

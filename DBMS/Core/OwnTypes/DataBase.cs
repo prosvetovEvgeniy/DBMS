@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DBMS.Core.OwnTypes
 {
@@ -15,6 +11,7 @@ namespace DBMS.Core.OwnTypes
         {
             tables = new List<Table>();
         }
+
         //checkers
         public string checkConnectionsOnDelete(string tableName, int numRow)
         {
@@ -211,6 +208,79 @@ namespace DBMS.Core.OwnTypes
             return dataByColumn;
         }
 
+        //others
 
+        public bool verifyСonnectivity(string columnName, string tableName, string linkedColumnName, string linkedTableName)
+        {
+            Table table = this.getTableByName(tableName);
+            Table linkedTable = this.getTableByName(linkedTableName);
+
+            List<string> dataByColumn = table.getDataByColumn(columnName);
+            List<string> linkedDataByColumn = linkedTable.getDataByColumn(linkedColumnName);
+
+            Description field = table.getFieldByName(columnName);
+            Description linkedField = linkedTable.getFieldByName(linkedColumnName);
+
+            //если slave таблица не имеет значение, то можно создать связь
+            if(dataByColumn.Count == 0)
+            {
+                return true;
+            }
+
+            if(dataByColumn.Count != 0 && linkedDataByColumn.Count == 0)
+            {
+                if (field.DefaultNULL)
+                {
+                    foreach(string cell in dataByColumn)
+                    {
+                        if(cell != "")
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            foreach(string cell in dataByColumn)
+            {
+                bool flag = false;
+                if(cell != "")
+                {
+                    foreach (string linkedCell in linkedDataByColumn)
+                    {
+                        if (cell == linkedCell)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (!flag)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public void connectTables(string columnName, string tableName, string linkedColumnName, string linkedTableName)
+        {
+            Table table = this.getTableByName(tableName);
+            Table linkedTable = this.getTableByName(linkedTableName);
+
+            Connection slaveConnection = new Connection(columnName, tableName, linkedColumnName, linkedTableName, Connection.SLAVE_CONNECTION);
+            Connection masterConnection = new Connection(linkedColumnName, linkedTableName, columnName, tableName, Connection.MASTER_CONNECTION);
+
+            table.addConnection(slaveConnection);
+            linkedTable.addConnection(masterConnection);
+        }
     }
 }

@@ -53,7 +53,30 @@ namespace DBMS
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(comboBox1.Text != "" && comboBox2.Text != "" && comboBox3.Text != "")
+            {
+                string columnName = comboBox1.Text;
+                string linkedTableName = comboBox2.Text;
+                string linkedColumnName = comboBox3.Text;
 
+                bool verify = db.verifyСonnectivity(columnName, table.TableName, linkedColumnName, linkedTableName);
+
+                if (verify)
+                {
+                    db.connectTables(columnName, table.TableName, linkedColumnName, linkedTableName);
+               
+                    owner.setColumns();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля");
+            }
         }
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
@@ -72,6 +95,11 @@ namespace DBMS
             {
                 throw new Exception("У таблицые нет подходящих полей для связывания");
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -36,7 +36,7 @@ namespace DBMS
             setColumns();
         }
 
-        private void setColumns()
+        public void setColumns()
         {
             dataGridView1.Columns.Clear();
 

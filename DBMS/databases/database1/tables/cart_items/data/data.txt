@@ -1,15 +1,5 @@
 {
-cart_id:0
-product_id:0
-amount:4
-}
-{
 cart_id:1
-product_id:1
+product_id:0
 amount:1
-}
-{
-cart_id:1
-product_id:0
-amount:2
 }

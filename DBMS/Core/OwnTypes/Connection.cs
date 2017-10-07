@@ -8,6 +8,9 @@ namespace DBMS.Core.OwnTypes
 {
     class Connection
     {
+        public const string SLAVE_CONNECTION = "slave";
+        public const string MASTER_CONNECTION = "master";
+
         private string column;
         private string tableName;
         private string linkedColumn;
@@ -24,12 +27,12 @@ namespace DBMS.Core.OwnTypes
             this.linkedTableName = linkedTableName;
             this.connectionType = connectionType;
 
-            if(this.connectionType == "slave")
+            if(this.connectionType == SLAVE_CONNECTION)
             {
                 isMaster = false;
                 isSlave = true;
             }
-            else if(this.connectionType == "master")
+            else if(this.connectionType == MASTER_CONNECTION)
             {
                 isMaster = true;
                 isSlave = false;

@@ -138,15 +138,7 @@ namespace DBMS
 
             dataGridView1.ReadOnly = true;
         }
-        private void consoleWrite(string str)
-        {
-            richTextBox1.Text += str;
-        }
-
-        private void consoleWriteLine(string str)
-        {
-            richTextBox1.Text += str + "\n";
-        }
+        
         private void button1_Click_1(object sender, EventArgs e)
         {
             ChangeForm changeForm = new ChangeForm();
