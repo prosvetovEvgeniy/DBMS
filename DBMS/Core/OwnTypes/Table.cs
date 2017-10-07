@@ -193,6 +193,35 @@ namespace DBMS.Core.OwnTypes
 
             return null;
         }
+        
+        public List<string> getFieldsWithoutConnections()
+        {
+            List<string> names = new List<string>();
+
+            foreach (Description field in fields)
+            {
+                bool flag = true;
+
+                if (!field.PrimaryKey)
+                {
+                    foreach (Connection connection in connections)
+                    {
+                        if (field.FieldName == connection.Column)
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+
+                    if (flag)
+                    {
+                        names.Add(field.FieldName);
+                    }
+                }
+            }
+
+            return names;
+        }
 
         //has
         public bool hasFieldsWithoutForeignKey()
@@ -232,5 +261,18 @@ namespace DBMS.Core.OwnTypes
 
             return false;
         }
+
+        public int getCountFieldsWithoutPK()
+        {
+            if (hasPK())
+            {
+                return fields.Count - 1;
+            }
+            else
+            {
+                return fields.Count;
+            }
+        }
+
     }
 }

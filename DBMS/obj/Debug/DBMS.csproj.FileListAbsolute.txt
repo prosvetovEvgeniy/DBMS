@@ -11,3 +11,17 @@ C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ChangeForm.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.csprojResolveAssemblyReference.cache
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ConnectionsForm.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.StructureForm.resources
+C:\Users\Евгений\Desktop\DBMS\DBMS\bin\Debug\DBMS.exe.config
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.exe
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.pdb
+C:\Users\Евгений\Desktop\DBMS\DBMS\bin\Debug\DBMS.exe
+C:\Users\Евгений\Desktop\DBMS\DBMS\bin\Debug\DBMS.pdb
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.csprojResolveAssemblyReference.cache
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddForm.resources
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.ChangeForm.resources
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.ConnectionsForm.resources
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.Form1.resources
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.Properties.Resources.resources
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.StructureForm.resources
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.csproj.GenerateResource.Cache
+C:\Users\Евгений\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddConnectionForm.resources
