@@ -13,8 +13,3 @@ id:2
 name:nikita
 phone:89131841102
 }
-{
-id:3
-name:ilia
-phone:89131841102
-}

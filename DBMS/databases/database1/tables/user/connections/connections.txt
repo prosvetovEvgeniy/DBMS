@@ -1,1 +1,1 @@
-id:user_id:cart:master,id:amount:cart_items:master,id:user_id:test:master,
+id:amount:cart_items:master,id:user_id:cart:master,id:user_id:test:master,

@@ -11,11 +11,12 @@ using DBMS.Core.OwnTypes;
 
 namespace DBMS
 {
-    public partial class StructureForm : Form
+    partial class StructureForm : Form
     {
         private Form1 owner;
         private string tableName;
         private Database db;
+        private Table table;
 
         public StructureForm()
         {
@@ -29,19 +30,32 @@ namespace DBMS
             db = owner.getDb();
             tableName = owner.getTableName();
 
+            table = db.getTableByName(tableName);
+
             setColumns();
         }
 
-        private void setColumns()
+        public void setColumns()
         {
+            dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+
             DataGridViewTextBoxColumn dgvTextBox = new DataGridViewTextBoxColumn();
             dgvTextBox.HeaderText = "Название";
 
-            DataGridViewComboBoxColumn dgvComboBox = new DataGridViewComboBoxColumn();
-            dgvComboBox.HeaderText = "Тип";
-            dgvComboBox.Items.AddRange("integer", "string");
+            DataGridViewTextBoxColumn dgvTypes = new DataGridViewTextBoxColumn();
+            dgvTypes.HeaderText = "Тип";
 
-            dataGridView1.Columns.AddRange(dgvTextBox, dgvComboBox);
+            DataGridViewCheckBoxColumn dgvNotNullCheckBox = new DataGridViewCheckBoxColumn();
+            dgvNotNullCheckBox.HeaderText = Description.DEFAULT_NULL;
+
+            DataGridViewCheckBoxColumn dgvIndexCheckBox = new DataGridViewCheckBoxColumn();
+            dgvIndexCheckBox.HeaderText = Description.INDEX;
+
+            DataGridViewCheckBoxColumn dgvPK = new DataGridViewCheckBoxColumn();
+            dgvPK.HeaderText = Description.PK;
+
+            dataGridView1.Columns.AddRange(dgvTextBox, dgvTypes, dgvNotNullCheckBox, dgvIndexCheckBox, dgvPK);
 
             Table table = db.getTableByName(tableName);
 
@@ -49,7 +63,7 @@ namespace DBMS
             {
                 Description description = table.getFieldByIndex(i);
 
-                dataGridView1.Rows.Add(description.FieldName, description.FieldType);
+                dataGridView1.Rows.Add(description.FieldName, description.FieldType, description.DefaultNULL, description.Index, description.PrimaryKey);
             }
         }
 
@@ -60,7 +74,77 @@ namespace DBMS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            owner.setTable();
+            AddFieldForm addForm = new AddFieldForm();
+            addForm.Owner = this;
+            addForm.initOwner();
+            addForm.ShowDialog();
         }
+
+        public Database getDb()
+        {
+            return db;
+        }
+
+        public string getTableName()
+        {
+            return tableName;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            owner.setTable();
+            Close();
+        }
+
+        private void StructureForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.RowCount > 0)
+            {
+                int numField = dataGridView1.CurrentRow.Index;
+
+                string fieldName = dataGridView1[0, numField].Value.ToString();
+
+                if (!table.fieldHasConnection(fieldName))
+                {
+                    table.removeField(fieldName);
+                    owner.setTable();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка, поле связано с другой таблицей");
+                }
+
+                setColumns();
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют поля для удаления");
+            }
+        }
+
+        /*(private void button4_Click(object sender, EventArgs e)
+        {
+
+            /*if(dataGridView1.RowCount > 0)
+            {
+                int numField = dataGridView1.CurrentRow.Index;
+
+                string fieldName = dataGridView1[0, numField].Value.ToString();
+
+                ChangeFieldForm addForm = new ChangeFieldForm(fieldName);
+                addForm.Owner = this;
+                addForm.initOwner();
+                addForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют поля для изменения");
+            }
+        }*/
     }
 }

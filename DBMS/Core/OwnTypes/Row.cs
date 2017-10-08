@@ -28,6 +28,23 @@ namespace DBMS.Core.OwnTypes
             fieldsContent.Add(content);
         }
 
+        //removers
+        public void removeField(string fieldName)
+        {
+            int index = 0;
+
+            for (int i = 0; i < fields.Count; i++) {
+                if(fields[i] == fieldName)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            fields.Remove(fieldName);
+            fieldsContent.RemoveAt(index);
+        }
+
         //setters
         public void setFields(List<string> fields)
         {

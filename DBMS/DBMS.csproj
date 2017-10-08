@@ -66,11 +66,23 @@
     <Compile Include="AddConnectionForm.Designer.cs">
       <DependentUpon>AddConnectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddFieldForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddFieldForm.Designer.cs">
+      <DependentUpon>AddFieldForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddForm.Designer.cs">
       <DependentUpon>AddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeFieldForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeFieldForm.Designer.cs">
+      <DependentUpon>ChangeFieldForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangeForm.cs">
       <SubType>Form</SubType>
@@ -114,8 +126,14 @@
     <EmbeddedResource Include="AddConnectionForm.resx">
       <DependentUpon>AddConnectionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddFieldForm.resx">
+      <DependentUpon>AddFieldForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeFieldForm.resx">
+      <DependentUpon>ChangeFieldForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeForm.resx">
       <DependentUpon>ChangeForm.cs</DependentUpon>

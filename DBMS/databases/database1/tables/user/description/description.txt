@@ -1,1 +1,1 @@
-id:integer:NOT_NULL:PRIMARY_KEY,name:string:DEFAULT_NULL,phone:string:DEFAULT_NULL
+id:integer:NOT_NULL:PRIMARY_KEY,name:string:DEFAULT_NULL,phone:string:DEFAULT_NULL,

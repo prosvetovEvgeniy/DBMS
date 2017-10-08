@@ -8,7 +8,6 @@ C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.exe
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.pdb
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddForm.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ChangeForm.resources
-C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.csprojResolveAssemblyReference.cache
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ConnectionsForm.resources
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.StructureForm.resources
 C:\Users\Евгений\Desktop\DBMS\DBMS\bin\Debug\DBMS.exe.config
@@ -40,3 +39,6 @@ C:\DBMS\DBMS\obj\Debug\DBMS.csproj.GenerateResource.Cache
 C:\DBMS\DBMS\obj\Debug\DBMS.exe
 C:\DBMS\DBMS\obj\Debug\DBMS.pdb
 C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddConnectionForm.resources
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.AddFieldForm.resources
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.ChangeFieldForm.resources
+C:\Users\medve\Desktop\DBMS\DBMS\obj\Debug\DBMS.csprojResolveAssemblyReference.cache

@@ -86,5 +86,15 @@ namespace DBMS.Core.OwnTypes
 
             return list;
         }
+
+        public bool hasConnection()
+        {
+            if(isMaster || isSlave)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

@@ -1,1 +1,1 @@
-cart_id:integer:DEFAULT_NULL:INDEX,product_id:integer:DEFAULT_NULL:INDEX,amount:integer:DEFAULT_NULL:INDEX
+cart_id:integer:DEFAULT_NULL:INDEX,product_id:integer:DEFAULT_NULL:INDEX,amount:integer:DEFAULT_NULL:INDEX,test:integer:DEFAULT_NULL,

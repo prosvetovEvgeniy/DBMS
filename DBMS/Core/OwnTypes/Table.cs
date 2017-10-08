@@ -40,7 +40,7 @@ namespace DBMS.Core.OwnTypes
         }
 
         //savers
-        public void saveRows()
+        public void saveRowsInFile()
         {
             FileManager fm = new FileManager();
             string data = "";
@@ -74,6 +74,40 @@ namespace DBMS.Core.OwnTypes
             File.WriteAllText(fm.getPathToTableConnections(dbName, tableName), data, Encoding.GetEncoding(1251));
         }
 
+        private void saveDescriptionInFile()
+        {
+            FileManager fm = new FileManager();
+            string data = "";
+
+            foreach(Description field in fields)
+            {
+                data += field.FieldName + ":" + field.FieldType + ":";
+
+                if (field.DefaultNULL)
+                {
+                    data += Description.DEFAULT_NULL;
+                }
+                else
+                {
+                    data += Description.NOT_NULL;
+                }
+
+                if (field.PrimaryKey)
+                {
+                    data += ":" + Description.PK;
+                }
+
+                if (field.Index)
+                {
+                    data += ":" + Description.INDEX;
+                }
+
+                data += ",";
+            }
+
+            File.WriteAllText(fm.getPathToTableDescription(dbName, tableName), data, Encoding.GetEncoding(1251));
+        }
+
         //adders
         public void addConnection(Connection connection)
         {
@@ -92,6 +126,23 @@ namespace DBMS.Core.OwnTypes
             }
 
             rows.Add(addedRow);
+        }
+
+        public void addField(string fieldName, string type, bool defaultNull, bool isIndex, bool pk)
+        {
+            Description newField = new Description(fieldName, type, pk, isIndex);
+            newField.setDefaultNull(defaultNull);
+
+            fields.Add(newField);
+
+            foreach(Row row in rows)
+            {
+                row.addField(newField.FieldName);
+                row.addContent("");
+            }
+
+            saveDescriptionInFile();
+            saveRowsInFile();
         }
 
         //removers
@@ -122,6 +173,27 @@ namespace DBMS.Core.OwnTypes
 
             saveConnectionsInFile();
         }
+
+        public void removeField(string fieldName) {
+
+            foreach(Description field in fields)
+            {
+                if(field.FieldName == fieldName)
+                {
+                    fields.Remove(field);
+                    break;
+                }
+            }
+
+            foreach(Row row in rows)
+            {
+                row.removeField(fieldName);
+            }
+
+            saveDescriptionInFile();
+            saveRowsInFile();
+        }
+
         //setters
         public void setTableName(string name)
         {
@@ -348,5 +420,32 @@ namespace DBMS.Core.OwnTypes
                 return fields.Count;
             }
         }
+
+        public bool fieldHasConnection(string fieldName)
+        {
+            foreach(Connection connection in connections)
+            {
+                if(fieldName == connection.Column && connection.hasConnection())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool fieldNameFree(string fieldName)
+        {
+            foreach(Description field in fields)
+            {
+                if(field.FieldName == fieldName)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
 }

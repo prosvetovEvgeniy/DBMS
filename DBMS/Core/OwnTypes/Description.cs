@@ -32,12 +32,30 @@ namespace DBMS.Core.OwnTypes
 
         public void setDefaultNull(bool defaultNull)
         {
-            this.defaultNull = defaultNull;
+            if (defaultNull)
+            {
+                this.defaultNull = true;
+                this.notNull = false;
+            }
+            else
+            {
+                this.defaultNull = false;
+                this.notNull = true;
+            }
         }
 
         public void setNotNull(bool notNull)
         {
-            this.notNull = notNull;
+            if (notNull)
+            {
+                this.notNull = true;
+                this.defaultNull = false;
+            }
+            else
+            {
+                this.notNull = false;
+                this.defaultNull = true;
+            }
         }
 
         public string FieldName {
@@ -67,6 +85,16 @@ namespace DBMS.Core.OwnTypes
         public bool NotNULL
         {
             get { return notNull; }
+        }
+
+        public static List<string> getTypesList()
+        {
+            List<string> list = new List<string>();
+
+            list.Add(INTEGER_TYPE);
+            list.Add(STRING_TYPE);
+
+            return list;
         }
     }
 }

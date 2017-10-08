@@ -75,6 +75,7 @@ namespace DBMS
                 MessageBox.Show("У таблицы не осталось полей без связей");
             }
         }
+
         public Database getDb()
         {
             return db;
@@ -84,6 +85,7 @@ namespace DBMS
         {
             return tableName;
         }
+
         private void button3_Click(object sender, EventArgs e)
         {
             Close();
@@ -108,6 +110,7 @@ namespace DBMS
 
                 
                 db.deleteConnection(columnName, tableName, linkedTableName, linkedColumnName);
+
 
                 setColumns();
             }
