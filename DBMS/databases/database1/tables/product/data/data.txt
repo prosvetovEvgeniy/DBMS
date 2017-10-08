@@ -10,3 +10,9 @@ category_id:1
 name:ѕуховик
 price:15000
 }
+{
+id:2
+category_id:5
+name:—ин€€ кепка
+price:1500
+}

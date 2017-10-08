@@ -282,5 +282,14 @@ namespace DBMS.Core.OwnTypes
             table.addConnection(slaveConnection);
             linkedTable.addConnection(masterConnection);
         }
+
+        public void deleteConnection(string columnName, string tableName, string linkedColumnName, string linkedTableName)
+        {
+            Table table = this.getTableByName(tableName);
+            Table linkedTable = this.getTableByName(linkedTableName);
+
+            table.removeConnection(columnName, linkedColumnName, linkedTableName);
+            linkedTable.removeConnection(linkedColumnName, columnName, tableName);
+        }
     }
 }

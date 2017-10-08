@@ -113,7 +113,7 @@ namespace DBMS
                 {
                     db.getTableByName(tableName).addRow(rows[i]);
                 }
-                db.getTableByName(tableName).save();
+                db.getTableByName(tableName).saveRows();
                 owner.setTable();
                 Close();
             }

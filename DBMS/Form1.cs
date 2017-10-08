@@ -159,7 +159,7 @@ namespace DBMS
                 if (check == "")
                 {
                     table.removeRowByIndex(numRow);
-                    table.save();
+                    table.saveRows();
                     setTable();
                 }
                 else

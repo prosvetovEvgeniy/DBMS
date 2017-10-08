@@ -40,7 +40,7 @@ namespace DBMS.Core.OwnTypes
         }
 
         //savers
-        public void save()
+        public void saveRows()
         {
             FileManager fm = new FileManager();
             string data = "";
@@ -55,13 +55,31 @@ namespace DBMS.Core.OwnTypes
                 data += "}\r\n";
             }
 
-            File.WriteAllText(fm.getPathToTableData(dbName, tableName), data, System.Text.Encoding.GetEncoding(1251));
+            File.WriteAllText(fm.getPathToTableData(dbName, tableName), data, Encoding.GetEncoding(1251));
+        }
+
+        private void saveConnectionsInFile()
+        {
+            FileManager fm = new FileManager();
+            string data = "";
+
+            foreach(Connection connection in connections)
+            {
+                data += connection.Column + ":"
+                    + connection.LindkedColumn + ":"
+                    + connection.LinkedTableName + ":"
+                    + connection.ConnectionType + ",";
+            }
+
+            File.WriteAllText(fm.getPathToTableConnections(dbName, tableName), data, Encoding.GetEncoding(1251));
         }
 
         //adders
         public void addConnection(Connection connection)
         {
             this.connections.Add(connection);
+
+            saveConnectionsInFile();
         }
 
         public void addRow(List<string> rowContent)
@@ -88,6 +106,22 @@ namespace DBMS.Core.OwnTypes
             rows.RemoveAt(index);
         }
 
+        public void removeConnection(string columnName, string linkedColumnName, string linkedTableName)
+        {
+
+            foreach (Connection connection in connections)
+            {
+                if(connection.Column == columnName &&
+                   connection.LindkedColumn == linkedColumnName &&
+                   connection.LinkedTableName == linkedTableName)
+                {
+                    connections.Remove(connection);
+                    break;
+                }
+            }
+
+            saveConnectionsInFile();
+        }
         //setters
         public void setTableName(string name)
         {
@@ -314,6 +348,5 @@ namespace DBMS.Core.OwnTypes
                 return fields.Count;
             }
         }
-
     }
 }

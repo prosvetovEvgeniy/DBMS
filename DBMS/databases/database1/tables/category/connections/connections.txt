@@ -1,1 +1,1 @@
-id:category_id:product:master
+id:category_id:product:master,id:category_id:test:master,parent_id:id:category:slave,id:parent_id:category:master,

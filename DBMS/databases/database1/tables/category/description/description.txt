@@ -1,1 +1,1 @@
-id:integer:NOT_NULL:PRIMARY_KEY,name:string:DEFAULT_NULL,parent_id:integer:DEFAULT_NULL
+id:integer:NOT_NULL:PRIMARY_KEY,name:string:DEFAULT_NULL,parent_id:integer:DEFAULT_NULL:INDEX

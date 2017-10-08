@@ -91,7 +91,30 @@ namespace DBMS
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            MessageBox.Show("asd");
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            if(dataGridView1.RowCount > 0)
+            {
+                int numConnection = dataGridView1.CurrentRow.Index;
+
+                string columnName = dataGridView1[0, numConnection].Value.ToString();
+                string tableName = dataGridView1[1, numConnection].Value.ToString();
+                string linkedColumnName = dataGridView1[2, numConnection].Value.ToString();
+                string linkedTableName = dataGridView1[3, numConnection].Value.ToString();
+
+                
+                db.deleteConnection(columnName, tableName, linkedTableName, linkedColumnName);
+
+                setColumns();
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют связи для удаления");
+            }
         }
     }
 }

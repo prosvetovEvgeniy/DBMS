@@ -1,0 +1,1 @@
+user_id:id:user:slave,product_id:id:product:slave,category_id:id:category:slave,

@@ -1,10 +1,30 @@
 {
+id:0
+name:Верхняя одежда
+parent_id:
+}
+{
 id:1
 name:Куртки
 parent_id:0
 }
 {
-id:0
-name:Верхняя одежда
+id:2
+name:Свитера
 parent_id:0
+}
+{
+id:3
+name:Футболки
+parent_id:0
+}
+{
+id:4
+name:Головные уборы
+parent_id:
+}
+{
+id:5
+name:Шапки
+parent_id:4
 }
